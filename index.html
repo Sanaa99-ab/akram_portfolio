@@ -1,0 +1,3045 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Akram Abril - 3D & AI Content Portfolio</title>
+<meta name="description" content="Portfolio of Akram Abril - 3D product visuals, AI ads, virtual influencer content, interior rendering and motion graphics." />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230b0d12'/%3E%3Ctext x='32' y='40' text-anchor='middle' font-family='Arial,sans-serif' font-size='24' font-weight='800' fill='%23c9952d'%3EAK%3C/text%3E%3C/svg%3E" />
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='42' fill='%230b0d12'/%3E%3Ctext x='90' y='112' text-anchor='middle' font-family='Arial,sans-serif' font-size='68' font-weight='800' fill='%23c9952d'%3EAK%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://unpkg.com">
+<style>
+:root{
+  --bg:#f7f3ea;
+  --surface:#ffffff;
+  --surface-2:#f0ebe0;
+  --surface-3:#e7f6f2;
+  --text:#141820;
+  --muted:#5f6874;
+  --line:rgba(20,24,32,.13);
+  --gold:#c9952d;
+  --cyan:#049b93;
+  --coral:#f07b62;
+  --ink:#0b0d12;
+  --cream:#fff8ea;
+  --sky:#e8f5ff;
+  --mint:#e4f7ef;
+  --rose:#fff0ea;
+  --shadow:0 24px 70px rgba(32,38,48,.16);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{
+  margin:0;
+  overflow-x:hidden;
+  color:var(--text);
+  background:
+    linear-gradient(145deg,rgba(240,123,98,.16),transparent 26%),
+    linear-gradient(225deg,rgba(4,155,147,.14),transparent 24%),
+    linear-gradient(180deg,#fffaf0 0%,#f3fbff 46%,#fff4ed 100%);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial,sans-serif;
+  line-height:1.5;
+}
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background-image:
+    linear-gradient(rgba(20,24,32,.055) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(20,24,32,.055) 1px,transparent 1px);
+  background-size:72px 72px;
+  mask-image:linear-gradient(180deg,rgba(0,0,0,.8),transparent 72%);
+}
+a{color:inherit;text-decoration:none}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+img,video{display:block;max-width:100%}
+input,textarea{
+  width:100%;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:12px 13px;
+  color:var(--text);
+  background:rgba(255,255,255,.86);
+  outline:none;
+}
+textarea{min-height:112px;resize:vertical}
+input:focus,textarea:focus{border-color:rgba(201,149,45,.72);box-shadow:0 0 0 3px rgba(201,149,45,.16)}
+.wrap{width:min(1180px,92vw);margin:0 auto}
+.nav{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:30;
+  border-bottom:1px solid rgba(255,255,255,.12);
+  background:#080808;
+  backdrop-filter:blur(18px);
+  transition:box-shadow .25s ease;
+}
+.nav.isScrolled{
+  box-shadow:0 14px 34px rgba(0,0,0,.18);
+}
+.nav.isScrolled ~ .hero .heroBg{
+  top:68px;
+  height:calc(100vh - 68px);
+}
+.jobStrip{
+  overflow:hidden;
+  background:#080808;
+  color:var(--gold);
+  text-align:center;
+  font-size:12px;
+  font-weight:850;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  padding:9px 12px;
+  max-height:40px;
+  opacity:1;
+  transform:translateY(0);
+  transition:max-height .34s ease,padding .34s ease,opacity .22s ease,transform .34s ease;
+}
+.nav.isScrolled .jobStrip{
+  max-height:0;
+  padding-top:0;
+  padding-bottom:0;
+  opacity:0;
+  transform:translateY(-100%);
+}
+.navin{position:relative;display:flex;align-items:center;justify-content:space-between;gap:22px;padding:15px 0}
+.brand{display:flex;align-items:center;gap:10px;min-width:0;font-weight:850;letter-spacing:.01em}
+.brand{color:#fff}
+.mark{width:38px;height:38px;flex:0 0 38px;border-radius:50%;display:block;overflow:hidden;border:2px solid var(--gold);background:#111;box-shadow:0 0 0 1px rgba(255,255,255,.12)}
+.mark img{width:100%;height:100%;object-fit:cover}
+.navlinks{display:flex;align-items:center;gap:8px}
+.navActions{display:flex;align-items:center;gap:10px}
+.headerSocial{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.headerSocial a{
+  width:36px;
+  height:36px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:50%;
+  color:#fff;
+  background:rgba(255,255,255,.06);
+  transition:background .18s ease,border-color .18s ease,color .18s ease,transform .18s ease;
+}
+.headerSocial a:hover{
+  border-color:var(--gold);
+  color:#171109;
+  background:var(--gold);
+  transform:translateY(-2px);
+}
+.headerSocial svg,
+.headerSocial img{
+  width:18px;
+  height:18px;
+  display:block;
+}
+.headerSocial img{
+  filter:invert(1);
+}
+.headerSocial a:hover img{
+  filter:brightness(0) saturate(100%);
+}
+.navlinks a,.iconBtn{
+  border:1px solid transparent;
+  color:rgba(255,255,255,.68);
+  border-radius:999px;
+  padding:9px 12px;
+  font-size:14px;
+}
+.navlinks a:hover{color:#fff;border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.08)}
+.iconBtn{display:none;min-width:42px;min-height:42px;padding:0;border-radius:50%;color:var(--gold);border-color:rgba(201,149,45,.48);background:rgba(201,149,45,.1)}
+.iconBtn:hover{color:#171109;border-color:var(--gold);background:var(--gold)}
+.menuIcon{
+  position:relative;
+  width:18px;
+  height:12px;
+  display:block;
+}
+.menuIcon:before,
+.menuIcon:after,
+.menuIcon span{
+  content:"";
+  position:absolute;
+  left:0;
+  width:100%;
+  height:2px;
+  border-radius:999px;
+  background:currentColor;
+}
+.menuIcon:before{top:0}
+.menuIcon span{top:5px}
+.menuIcon:after{bottom:0}
+.mobileMenu{display:none}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  min-height:44px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:11px 16px;
+  color:var(--text);
+  background:rgba(255,255,255,.55);
+  transition:transform .2s ease,background .2s ease,border-color .2s ease;
+}
+.btn:hover{transform:translateY(-2px);background:rgba(255,255,255,.9)}
+.btn.primary{background:var(--gold);color:#171109;border-color:var(--gold);font-weight:850}
+.btn.dark{background:var(--text);color:#fff}
+.navCta{min-height:38px;padding:8px 14px;font-size:14px}
+.hero{
+  position:relative;
+  padding:0;
+  min-height:0;
+  display:block;
+  overflow:visible;
+  background:#15120d;
+  --hero-progress:0;
+  --hero-overlay:0;
+  --copy-opacity:0;
+  --copy-y:54px;
+}
+.heroBg{
+  position:fixed;
+  top:88px;
+  left:0;
+  right:0;
+  z-index:0;
+  height:calc(100vh - 88px);
+  background:#15120d;
+  overflow:hidden;
+  pointer-events:none;
+  visibility:visible;
+}
+.heroBg.isDormant{
+  visibility:hidden;
+}
+.heroBg video{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center top;
+  opacity:var(--hero-video-opacity);
+  transform:none;
+  filter:none;
+  image-rendering:auto;
+}
+.hero:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:transparent;
+}
+.heroLayout{
+  position:relative;
+  z-index:2;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(320px,460px);
+  gap:34px;
+  align-items:center;
+  min-height:0;
+  margin-top:0;
+  padding-top:74vh;
+  padding-bottom:16vh;
+}
+.heroLayout:before{
+  content:"";
+  position:absolute;
+  inset:58vh -100vmax 0;
+  z-index:-1;
+  background:
+    linear-gradient(180deg,transparent,rgba(0,0,0,.16) 24%,rgba(255,250,240,.3)),
+    linear-gradient(90deg,rgba(0,0,0,.2),rgba(0,0,0,.05) 56%,rgba(255,250,240,.12));
+  opacity:var(--hero-overlay);
+}
+.kicker{color:var(--cyan);text-transform:uppercase;letter-spacing:.16em;font-size:12px;font-weight:850}
+h1{font-size:clamp(42px,6.8vw,88px);line-height:.94;margin:14px 0 20px;max-width:900px;letter-spacing:0}
+.highlight{
+  color:inherit;
+  position:relative;
+  display:inline-block;
+}
+.highlight:after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:.02em;
+  height:.2em;
+  z-index:-1;
+  background:rgba(201,149,45,.62);
+  box-shadow:0 0 18px rgba(201,149,45,.28);
+}
+.lead{font-size:clamp(18px,2vw,23px);color:var(--muted);max-width:760px;margin:0 0 26px}
+.actions{display:flex;flex-wrap:wrap;gap:10px}
+.heroGlass{
+  width:min(900px,100%);
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  backdrop-filter:none;
+  opacity:var(--copy-opacity);
+  transform:translateY(var(--copy-y));
+  visibility:hidden;
+  pointer-events:none;
+  transition:none;
+}
+.heroFrame{
+  width:100%;
+  aspect-ratio:var(--frame-ratio,16/9);
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:10px;
+  overflow:hidden;
+  background:#050505;
+  box-shadow:0 24px 70px rgba(0,0,0,.36);
+  opacity:var(--copy-opacity);
+  transform:translateY(var(--copy-y));
+  visibility:hidden;
+  pointer-events:none;
+  transition:none;
+}
+.heroFrame.isVisible{
+  visibility:visible;
+}
+.heroFrame video{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center;
+  background:#050505;
+}
+.heroGlass.isVisible{
+  opacity:var(--copy-opacity);
+  transform:translateY(var(--copy-y));
+  visibility:visible;
+  pointer-events:auto;
+}
+.heroGlass h1,
+.heroGlass .lead{
+  color:#fff;
+  text-shadow:0 3px 24px rgba(0,0,0,.52),0 10px 42px rgba(0,0,0,.28);
+}
+.heroGlass .kicker{
+  color:#fff4d8;
+  text-shadow:0 3px 18px rgba(0,0,0,.46);
+}
+.heroGlass .btn{
+  background:rgba(255,255,255,.72);
+  box-shadow:0 12px 30px rgba(20,24,32,.12);
+}
+.heroGlass .btn.dark{
+  background:rgba(20,24,32,.9);
+  color:#fff;
+}
+.heroGlass h1,
+.heroGlass .lead,
+.heroGlass .roleLine,
+.heroGlass .actions{
+  animation:none;
+}
+.heroGlass:not(.isVisible) h1,
+.heroGlass:not(.isVisible) .lead{animation:none}
+.heroGlass.isVisible h1,
+.heroGlass.isVisible .lead,
+.heroGlass.isVisible .roleLine{animation:none}
+@keyframes heroItem{
+  from{opacity:0;transform:translateY(18px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.roleLine{
+  margin:0 0 14px;
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  font-size:12px;
+  font-weight:850;
+  text-shadow:0 3px 18px rgba(0,0,0,.46);
+}
+section{position:relative;padding:62px 0}
+section{clip-path:inset(0 -100vmax)}
+section:nth-of-type(1){background:linear-gradient(145deg,#fffaf0 0%,#eef9f6 48%,#fff4ee 100%);box-shadow:0 0 0 100vmax #eef9f6}
+section:nth-of-type(2){background:var(--mint);box-shadow:0 0 0 100vmax var(--mint)}
+section:nth-of-type(3){background:linear-gradient(135deg,#fff,var(--rose));box-shadow:0 0 0 100vmax var(--rose)}
+section:nth-of-type(4){background:var(--sky);box-shadow:0 0 0 100vmax var(--sky)}
+section:nth-of-type(5){background:linear-gradient(135deg,var(--cream),#fff);box-shadow:0 0 0 100vmax var(--cream)}
+#showreel{background:#fbf2df;box-shadow:0 0 0 100vmax #fbf2df}
+#showreel{padding-top:96px}
+#services{
+  isolation:isolate;
+  overflow:visible;
+  background:transparent;
+  box-shadow:none;
+  color:#fffaf0;
+}
+#services:before{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:50%;
+  width:100vw;
+  z-index:0;
+  transform:translateX(-50%);
+  pointer-events:none;
+  background:
+    linear-gradient(60deg,transparent 49%,rgba(201,149,45,.18) 50%,transparent 51%),
+    linear-gradient(-60deg,transparent 49%,rgba(201,149,45,.18) 50%,transparent 51%),
+    linear-gradient(0deg,transparent 49%,rgba(201,149,45,.14) 50%,transparent 51%),
+    radial-gradient(circle at 18% 18%,rgba(201,149,45,.18),transparent 34%),
+    #101014;
+  background-size:42px 72px,42px 72px,42px 72px,auto,auto;
+}
+#services > *{
+  position:relative;
+  z-index:1;
+}
+#services .sub{color:rgba(255,250,240,.68)}
+#contact{
+  isolation:isolate;
+  background:transparent;
+  box-shadow:none;
+}
+#contact:before{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:50%;
+  width:100vw;
+  z-index:0;
+  transform:translateX(-50%);
+  pointer-events:none;
+  background:
+    linear-gradient(60deg,transparent 49%,rgba(201,149,45,.16) 50%,transparent 51%),
+    linear-gradient(-60deg,transparent 49%,rgba(201,149,45,.16) 50%,transparent 51%),
+    linear-gradient(0deg,transparent 49%,rgba(201,149,45,.1) 50%,transparent 51%),
+    #fbf2df;
+  background-size:42px 72px,42px 72px,42px 72px,auto;
+}
+#contact > *{
+  position:relative;
+  z-index:1;
+}
+.sectionTop{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:24px}
+h2{font-size:clamp(30px,4vw,48px);line-height:1;margin:0;letter-spacing:0}
+.titleAccent{
+  position:relative;
+  display:inline-block;
+}
+.titleAccent:after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-15px;
+  height:12px;
+  border-bottom:4px solid var(--gold);
+  border-radius:0 0 50% 50%;
+}
+.sub{color:var(--muted);max-width:670px;margin:10px 0 0}
+#showreel.wrap{
+  width:100%;
+  max-width:none;
+  padding-left:0;
+  padding-right:0;
+}
+.projectNavigator{
+  min-height:auto;
+  overflow:visible;
+  background:#fbf2df;
+  box-shadow:0 0 0 100vmax #fbf2df;
+}
+.showreelSticky{
+  position:relative;
+  top:auto;
+  width:100%;
+  margin:0 auto;
+}
+.showreelCarousel{
+  position:relative;
+  min-height:760px;
+  display:grid;
+  place-items:center;
+  overflow:visible;
+}
+.showreelPanel{
+  position:relative;
+  z-index:2;
+  width:min(560px,72vw);
+  aspect-ratio:1;
+  border:1px solid rgba(201,149,45,.42);
+  border-radius:50%;
+  background:rgba(255,250,240,.66);
+  box-shadow:0 34px 90px rgba(32,38,48,.16),0 0 0 26px rgba(201,149,45,.08);
+}
+.projectCircleDemo{
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+}
+.reelStage{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  border:10px solid #fffaf0;
+  border-radius:50%;
+  background:#111;
+  box-shadow:0 22px 70px rgba(0,0,0,.28);
+}
+.reelStage video,.reelStage img{width:100%;height:100%;object-fit:cover;background:#111}
+.projectInfoCircle{
+  position:absolute;
+  left:50%;
+  bottom:-20px;
+  z-index:5;
+  width:min(300px,58%);
+  aspect-ratio:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  border:1px solid rgba(201,149,45,.5);
+  border-radius:50%;
+  padding:34px;
+  color:#171109;
+  background:#f4e3c7;
+  box-shadow:0 24px 64px rgba(32,38,48,.2);
+  opacity:0;
+  pointer-events:none;
+  transform:translate(-50%,52%) rotate(-90deg) scale(.72);
+  transform-origin:50% -72%;
+  transition:opacity .28s ease,transform .48s cubic-bezier(.2,.85,.2,1);
+}
+.projectCircleDemo:hover .projectInfoCircle,
+.projectCircleDemo:focus-within .projectInfoCircle{
+  opacity:1;
+  transform:translate(34%,-24%) rotate(0) scale(1);
+}
+.projectInfoCircle h3{
+  display:-webkit-box;
+  max-height:76px;
+  margin:0 0 8px;
+  overflow:hidden;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  font-size:clamp(18px,2vw,24px);
+  line-height:1.05;
+}
+.projectInfoCircle .category{
+  display:-webkit-box;
+  max-height:36px;
+  margin-bottom:8px;
+  overflow:hidden;
+  color:#846019;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  font-size:11px;
+}
+.projectInfoCircle .desc{
+  display:-webkit-box;
+  max-height:92px;
+  margin:0;
+  overflow:hidden;
+  color:rgba(23,17,9,.72);
+  -webkit-line-clamp:5;
+  -webkit-box-orient:vertical;
+  font-size:12px;
+  line-height:1.35;
+}
+.projectOrbitCircle{
+  --orbit-radius:min(490px,43vw);
+  position:absolute;
+  left:50%;
+  top:50%;
+  z-index:1;
+  width:min(980px,86vw);
+  aspect-ratio:1;
+  border:1px solid rgba(201,149,45,.32);
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+}
+.projectOrbitCircle:before,
+.projectOrbitCircle:after{
+  content:"";
+  position:absolute;
+  inset:9%;
+  border:1px dashed rgba(20,24,32,.14);
+  border-radius:50%;
+}
+.projectOrbitCircle:after{
+  inset:22%;
+  border-style:solid;
+  opacity:.45;
+}
+.projectDot{
+  --dot-angle:0deg;
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:18px;
+  height:18px;
+  border:2px solid #fffaf0;
+  border-radius:50%;
+  padding:0;
+  background:rgba(20,24,32,.45);
+  box-shadow:0 8px 18px rgba(32,38,48,.16);
+  transform:rotate(var(--dot-angle)) translate(var(--orbit-radius)) rotate(calc(var(--dot-angle) * -1));
+  transform-origin:center;
+  transition:background .2s ease,transform .2s ease,box-shadow .2s ease;
+}
+.projectDot:hover,
+.projectDot.active{
+  background:var(--gold);
+  box-shadow:0 10px 24px rgba(201,149,45,.36);
+}
+.projectDot.active{
+  width:24px;
+  height:24px;
+}
+.projectDotLabel{
+  position:absolute;
+  left:50%;
+  top:calc(100% + 10px);
+  width:max-content;
+  max-width:170px;
+  border:1px solid rgba(20,24,32,.12);
+  border-radius:999px;
+  padding:6px 9px;
+  color:#171109;
+  background:#fffaf0;
+  box-shadow:0 12px 26px rgba(32,38,48,.12);
+  font-size:11px;
+  font-weight:850;
+  opacity:0;
+  pointer-events:none;
+  transform:translate(-50%,-4px);
+  transition:opacity .18s ease,transform .18s ease;
+}
+.projectDot:hover .projectDotLabel,
+.projectDot.active .projectDotLabel{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+.projectHint{
+  position:absolute;
+  right:10%;
+  bottom:10%;
+  z-index:6;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  border:1px solid rgba(20,24,32,.1);
+  border-radius:999px;
+  padding:6px 10px 6px 6px;
+  color:rgba(255,255,255,.9);
+  background:rgba(8,9,13,.46);
+  opacity:.78;
+  transform:none;
+  backdrop-filter:blur(12px);
+  box-shadow:0 18px 40px rgba(0,0,0,.22);
+  transition:opacity .2s ease,transform .2s ease,background .2s ease;
+}
+.projectHint:hover{opacity:1;transform:translateY(-2px);background:rgba(8,9,13,.68)}
+.projectHintArrow{
+  flex:0 0 auto;
+  width:24px;
+  height:24px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  color:#171109;
+  background:var(--gold);
+  font-size:16px;
+  line-height:1;
+}
+.projectHintText{
+  color:#fff;
+  font-size:10px;
+  font-weight:850;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+.mediaPlay{
+  position:absolute;
+  left:50%;
+  top:50%;
+  z-index:3;
+  width:58px;
+  height:58px;
+  display:grid;
+  place-items:center;
+  border:0;
+  border-radius:50%;
+  color:#171109;
+  background:var(--gold);
+  box-shadow:0 18px 42px rgba(0,0,0,.28),0 0 0 8px rgba(201,149,45,.18);
+  transform:translate(-50%,-50%);
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+.mediaPlay:hover{
+  transform:translate(-50%,-50%) scale(1.06);
+  box-shadow:0 20px 46px rgba(0,0,0,.32),0 0 0 10px rgba(201,149,45,.2);
+}
+.mediaPlayIcon{
+  width:0;
+  height:0;
+  margin-left:4px;
+  border-top:11px solid transparent;
+  border-bottom:11px solid transparent;
+  border-left:17px solid currentColor;
+}
+.mediaControls{
+  position:absolute;
+  left:50%;
+  bottom:18px;
+  z-index:5;
+  display:flex;
+  gap:8px;
+  transform:translateX(-50%);
+}
+.mediaControl{
+  min-width:42px;
+  height:38px;
+  display:inline-grid;
+  place-items:center;
+  border:1px solid rgba(255,255,255,.3);
+  border-radius:999px;
+  padding:0 10px;
+  color:#fff;
+  background:rgba(8,9,13,.62);
+  backdrop-filter:blur(10px);
+  box-shadow:0 12px 28px rgba(0,0,0,.24);
+  font-size:12px;
+  font-weight:850;
+}
+.mediaControl svg{
+  width:18px;
+  height:18px;
+  display:block;
+  stroke:currentColor;
+}
+.mediaControl:hover{
+  color:#171109;
+  background:var(--gold);
+}
+.mediaZoom{
+  width:100%;
+  height:100%;
+  border:0;
+  padding:0;
+  background:#111;
+}
+.mediaZoom img{width:100%;height:100%;object-fit:contain}
+.projectCircleDemo .mediaZoom img{object-fit:cover}
+.projectTree{
+  position:relative;
+  display:grid;
+  gap:140px;
+  padding:48px 0 80px;
+  overflow:visible;
+}
+.projectTree:before{
+  display:none;
+}
+.projectSegmentSvg{
+  position:absolute;
+  left:0;
+  top:50%;
+  z-index:0;
+  width:100%;
+  height:calc(100% + 140px);
+  overflow:visible;
+  pointer-events:none;
+}
+.projectConnectionShadow,
+.projectConnectionLine{
+  fill:none;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  vector-effect:non-scaling-stroke;
+}
+.projectConnectionShadow{
+  stroke:rgba(20,24,32,.12);
+  stroke-width:16;
+}
+.projectConnectionLine{
+  stroke:rgba(201,149,45,.72);
+  stroke-width:5;
+}
+.projectBranch{
+  --branch-side:1;
+  --branch-lift:-18px;
+  --branch-joint:22%;
+  position:relative;
+  z-index:1;
+  min-height:620px;
+  display:grid;
+  align-items:center;
+  grid-template-columns:minmax(380px,.5fr) minmax(0,1.5fr);
+  column-gap:32px;
+  padding-inline:clamp(24px,4vw,72px);
+}
+.projectBranch:nth-child(even){
+  --branch-side:-1;
+  --branch-lift:18px;
+  --branch-joint:78%;
+}
+.projectBranch:before{
+  display:none;
+}
+.projectBranch:nth-child(even):before{
+  display:none;
+}
+.projectBranch:after{
+  display:none;
+}
+.projectSystem{
+  position:relative;
+  width:min(860px,60vw);
+  aspect-ratio:1;
+  grid-column:2;
+  justify-self:end;
+  margin-left:0;
+  margin-right:0;
+}
+.projectBranch:nth-child(even) .projectSystem{
+  grid-column:1;
+  grid-row:1;
+  justify-self:start;
+  margin-left:0;
+  margin-right:0;
+}
+.projectBranch:nth-child(even){
+  grid-template-columns:minmax(0,1.5fr) minmax(380px,.5fr);
+}
+.projectSystemOrbit{
+  position:absolute;
+  inset:4%;
+  border:1px solid rgba(201,149,45,.34);
+  border-radius:50%;
+}
+.projectSystemOrbit:before,
+.projectSystemOrbit:after{
+  content:"";
+  position:absolute;
+  inset:13%;
+  border:1px dashed rgba(20,24,32,.13);
+  border-radius:50%;
+}
+.projectSystemOrbit:after{
+  inset:27%;
+  border-style:solid;
+  opacity:.45;
+}
+.projectPlanet{
+  position:absolute;
+  left:50%;
+  top:50%;
+  z-index:2;
+  width:72%;
+  aspect-ratio:1;
+  border:9px solid #fffaf0;
+  border-radius:50%;
+  overflow:hidden;
+  background:#111;
+  box-shadow:0 28px 76px rgba(32,38,48,.24),0 0 0 18px rgba(201,149,45,.08);
+  transform:translate(-50%,-50%);
+}
+.projectPlanet video,
+.projectPlanet img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  background:#111;
+}
+.projectPlanet .mediaZoom{
+  width:100%;
+  height:100%;
+}
+.projectResource{
+  --resource-angle:0deg;
+  --resource-radius:min(376px,26vw);
+  position:absolute;
+  left:50%;
+  top:50%;
+  z-index:3;
+  width:58px;
+  aspect-ratio:1;
+  border:4px solid #fffaf0;
+  border-radius:50%;
+  padding:0;
+  overflow:hidden;
+  background:#111;
+  box-shadow:0 14px 34px rgba(32,38,48,.18);
+  transform:rotate(var(--resource-angle)) translate(var(--resource-radius)) rotate(calc(var(--resource-angle) * -1));
+  transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
+}
+.projectResource:hover,
+.projectResource.active{
+  border-color:var(--gold);
+  box-shadow:0 16px 40px rgba(201,149,45,.32);
+}
+.projectResource img,
+.projectResource video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.projectResourceType{
+  position:absolute;
+  left:50%;
+  bottom:-1px;
+  width:100%;
+  padding:2px 0;
+  color:#fff;
+  background:rgba(8,9,13,.68);
+  font-size:8px;
+  font-weight:850;
+  text-transform:uppercase;
+  transform:translateX(-50%);
+}
+.projectBranchLabel{
+  position:relative;
+  z-index:3;
+  grid-column:1;
+  justify-self:end;
+  width:min(560px,100%);
+  margin-right:0;
+  overflow:hidden;
+  border:1px solid rgba(201,149,45,.38);
+  border-radius:24px;
+  padding:34px 34px 28px;
+  color:rgba(23,17,9,.76);
+  background:
+    linear-gradient(135deg,rgba(255,250,240,.94),rgba(244,227,199,.9)),
+    #fffaf0;
+  box-shadow:0 24px 70px rgba(32,38,48,.14),inset 0 1px 0 rgba(255,255,255,.72);
+  transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;
+}
+.projectBranchLabel:before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:7px;
+  background:linear-gradient(180deg,var(--gold),rgba(201,149,45,.28));
+}
+.projectBranchLabel:after{
+  content:"";
+  position:absolute;
+  right:-70px;
+  top:-80px;
+  width:180px;
+  height:180px;
+  border:1px solid rgba(201,149,45,.22);
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(201,149,45,.16),transparent 64%);
+  pointer-events:none;
+}
+.projectBranchLabel:hover{
+  transform:translateY(-4px);
+  border-color:rgba(201,149,45,.58);
+  box-shadow:0 30px 82px rgba(32,38,48,.18),inset 0 1px 0 rgba(255,255,255,.8);
+}
+.projectBranch:nth-child(even) .projectBranchLabel{
+  grid-column:2;
+  justify-self:start;
+  margin-right:0;
+  margin-left:0;
+  text-align:left;
+}
+.projectBranchLabel strong{
+  position:relative;
+  z-index:1;
+  display:block;
+  color:#171109;
+  font-size:clamp(24px,2.6vw,38px);
+  line-height:1.05;
+}
+.projectBranchLabel span{
+  position:relative;
+  z-index:1;
+  display:inline-flex;
+  align-items:center;
+  width:fit-content;
+  max-width:100%;
+  margin:0 0 14px;
+  border:1px solid rgba(201,149,45,.36);
+  border-radius:999px;
+  padding:7px 10px;
+  color:#6f5012;
+  background:rgba(255,255,255,.56);
+  font-size:13px;
+  font-weight:850;
+  line-height:1.2;
+}
+.projectBranchLabel p{
+  position:relative;
+  z-index:1;
+  display:block;
+  max-height:none;
+  margin:18px 0 0;
+  overflow:visible;
+  color:rgba(23,17,9,.72);
+  font-size:16px;
+  line-height:1.55;
+}
+.lightbox{
+  position:fixed;
+  inset:0;
+  z-index:80;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  background:rgba(8,9,13,.88);
+}
+.lightboxFrame{
+  position:relative;
+  max-width:92vw;
+  max-height:86vh;
+  display:grid;
+  place-items:center;
+}
+.lightbox img{
+  max-width:100%;
+  max-height:86vh;
+  object-fit:contain;
+  border-radius:14px;
+  box-shadow:0 24px 80px rgba(0,0,0,.44);
+}
+.lightboxNav{
+  position:fixed;
+  top:50%;
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:50%;
+  color:#171109;
+  background:var(--gold);
+  box-shadow:0 16px 40px rgba(0,0,0,.28);
+  transform:translateY(-50%);
+}
+.lightboxPrev{left:24px}
+.lightboxNext{right:24px}
+.lightboxClose{
+  position:fixed;
+  top:18px;
+  right:18px;
+  z-index:2;
+  min-width:88px;
+  height:38px;
+  border:1px solid rgba(255,255,255,.32);
+  border-radius:999px;
+  color:#fff;
+  background:rgba(8,9,13,.62);
+  backdrop-filter:blur(10px);
+  font-size:12px;
+  font-weight:850;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.lightboxCount{
+  position:absolute;
+  left:50%;
+  bottom:18px;
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:999px;
+  padding:7px 12px;
+  color:#fff;
+  background:rgba(8,9,13,.62);
+  font-size:12px;
+  font-weight:800;
+  transform:translateX(-50%);
+}
+.assetCount{
+  position:absolute;
+  left:14px;
+  top:14px;
+  z-index:2;
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:999px;
+  padding:7px 10px;
+  color:#fff;
+  background:rgba(8,9,13,.62);
+  backdrop-filter:blur(10px);
+  font-size:12px;
+  font-weight:800;
+}
+.carouselControls{
+  position:absolute;
+  left:14px;
+  right:14px;
+  bottom:14px;
+  z-index:2;
+  display:flex;
+  justify-content:space-between;
+  pointer-events:none;
+}
+.carouselControls button{
+  pointer-events:auto;
+  width:42px;
+  height:42px;
+  border:1px solid rgba(255,255,255,.32);
+  border-radius:50%;
+  color:#fff;
+  background:rgba(8,9,13,.58);
+  backdrop-filter:blur(10px);
+}
+.reelCopy{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  min-width:0;
+  min-height:0;
+  padding:30px;
+  background:#f4e3c7;
+}
+.reelCopy h3,.projectInfo h3,.service h3{margin:0 0 10px}
+.reelCopy h3{
+  display:-webkit-box;
+  max-height:68px;
+  overflow:hidden;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+}
+.reelCopy .category{
+  display:-webkit-box;
+  max-height:40px;
+  overflow:hidden;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+}
+.reelCopy .desc{
+  display:-webkit-box;
+  max-height:96px;
+  overflow:hidden;
+  -webkit-line-clamp:4;
+  -webkit-box-orient:vertical;
+}
+.projectRail{
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:-190px;
+  width:174px;
+  z-index:4;
+  pointer-events:none;
+  overflow:visible;
+}
+.projectRail:before{
+  content:"";
+  position:absolute;
+  top:12%;
+  bottom:12%;
+  left:18px;
+  width:1px;
+  background:linear-gradient(180deg,transparent,rgba(20,24,32,.24),transparent);
+}
+.railItem{
+  --rail-offset:0;
+  --rail-depth:0px;
+  --rail-scale:.5;
+  --rail-opacity:.32;
+  position:absolute;
+  top:50%;
+  left:0;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:0;
+  padding:0;
+  color:var(--muted);
+  background:transparent;
+  opacity:var(--rail-opacity);
+  transform:translate(var(--rail-depth),calc(-50% + (var(--rail-offset) * 38px))) scale(var(--rail-scale));
+  transform-origin:center;
+  pointer-events:auto;
+  transition:opacity .2s ease,transform .2s ease,color .2s ease,z-index .2s ease;
+}
+.railItem:hover{opacity:.86;color:var(--text)}
+.railLabel{
+  position:relative;
+  z-index:1;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:38px;
+  max-width:178px;
+  border:1px solid rgba(20,24,32,.14);
+  border-radius:999px;
+  padding:10px 16px;
+  background:#fff8ed;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size:14px;
+  font-weight:850;
+  text-align:left;
+  box-shadow:0 10px 22px rgba(32,38,48,.06);
+  transition:background .2s ease,border-color .2s ease,color .2s ease,box-shadow .2s ease;
+}
+.railLabel:before{
+  content:"";
+  position:absolute;
+  inset:-3px;
+  z-index:-1;
+  border-radius:999px;
+  background:#fff8ed;
+}
+.railItem.active .railLabel:before{background:var(--gold)}
+.railItem:after{
+  content:attr(data-full-label);
+  position:absolute;
+  left:100%;
+  top:50%;
+  width:max-content;
+  max-width:280px;
+  margin-left:12px;
+  border:1px solid rgba(20,24,32,.14);
+  border-radius:10px;
+  padding:8px 10px;
+  color:var(--text);
+  background:#fffaf0;
+  box-shadow:0 14px 32px rgba(32,38,48,.16);
+  font-size:12px;
+  font-weight:800;
+  line-height:1.25;
+  text-align:left;
+  white-space:normal;
+  opacity:0;
+  pointer-events:none;
+  transform:translate(6px,-50%);
+  transition:opacity .18s ease,transform .18s ease;
+}
+.railItem:hover:after,
+.railItem:focus-visible:after{
+  opacity:1;
+  transform:translate(0,-50%);
+}
+.railItem.near{color:rgba(20,24,32,.78)}
+.railItem.mid{color:rgba(20,24,32,.56)}
+.railItem.far{color:rgba(20,24,32,.42)}
+.railItem.active{
+  color:#171109;
+  opacity:1;
+  --rail-depth:0px;
+  --rail-scale:1.12;
+  --rail-opacity:1;
+  z-index:3;
+}
+.railItem.active .railLabel{
+  min-height:46px;
+  max-width:196px;
+  border-color:var(--gold);
+  background:var(--gold);
+  box-shadow:0 12px 24px rgba(201,149,45,.28);
+  font-size:15px;
+}
+.assetStrip{
+  flex:0 0 auto;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  max-height:124px;
+  margin:16px 0 18px;
+  overflow:hidden;
+  padding-bottom:4px;
+}
+.assetThumb{
+  flex:0 0 54px;
+  width:54px;
+  aspect-ratio:1;
+  border:2px solid transparent;
+  border-radius:10px;
+  padding:0;
+  overflow:hidden;
+  background:#111;
+}
+.assetThumb.active{border-color:var(--gold)}
+.assetThumb img,.assetThumb video{width:100%;height:100%;object-fit:cover}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+.filter{
+  border:1px solid var(--line);
+  color:var(--muted);
+  background:rgba(255,255,255,.62);
+  border-radius:999px;
+  padding:10px 14px;
+}
+.filter.active{color:#fff;background:var(--text);border-color:var(--text);font-weight:800}
+.workLayout{display:block}
+.eyebrow{color:var(--gold);font-size:12px;text-transform:uppercase;letter-spacing:.14em;font-weight:850}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr;gap:16px}
+.card{
+  height:520px;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:rgba(255,255,255,.78);
+  transition:transform .22s ease,border-color .22s ease,background .22s ease;
+}
+.card:hover{transform:translateY(-4px);border-color:rgba(201,149,45,.42);background:#fff}
+.thumb{position:relative;aspect-ratio:16/10;background:#111;overflow:hidden;border:0;padding:0;width:100%;color:inherit;text-align:left;flex:0 0 auto}
+.thumb img,.thumb video{width:100%;height:100%;object-fit:cover;background:#111;transition:transform .32s ease}
+.card:hover .thumb img,.card:hover .thumb video{transform:scale(1.035)}
+.tag{
+  position:absolute;
+  left:12px;
+  top:12px;
+  border:1px solid rgba(255,255,255,.32);
+  border-radius:999px;
+  padding:7px 10px;
+  background:rgba(8,9,13,.68);
+  backdrop-filter:blur(8px);
+  font-size:12px;
+}
+.projectInfo{padding:18px;display:flex;flex:1;flex-direction:column}
+.category{color:var(--cyan);font-size:13px;font-weight:800;margin-bottom:9px}
+.desc{color:var(--muted);margin:0 0 16px}
+.card .category{
+  display:-webkit-box;
+  min-height:38px;
+  max-height:38px;
+  overflow:hidden;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+}
+.card h3{
+  display:-webkit-box;
+  min-height:58px;
+  max-height:58px;
+  overflow:hidden;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+}
+.card .desc{
+  display:-webkit-box;
+  min-height:96px;
+  max-height:96px;
+  overflow:hidden;
+  -webkit-line-clamp:4;
+  -webkit-box-orient:vertical;
+}
+.card .btn{margin-top:auto;align-self:flex-start}
+.metaLine{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.pill{border:1px solid var(--line);border-radius:999px;padding:6px 9px;color:var(--muted);font-size:12px;background:rgba(255,255,255,.035)}
+.services{
+  display:grid;
+  gap:18px;
+}
+.serviceRow{
+  display:flex;
+}
+.serviceRow:nth-child(even){
+  justify-content:flex-end;
+}
+.service{
+  width:min(560px,78%);
+  border:1px solid rgba(201,149,45,.58);
+  border-radius:18px;
+  padding:22px;
+  color:#171109;
+  background:linear-gradient(180deg,#fff4dc,#efd29a);
+  box-shadow:0 18px 44px rgba(0,0,0,.34),0 0 0 1px rgba(255,250,240,.18),0 0 34px rgba(201,149,45,.18);
+  transform-origin:center;
+  animation:serviceFloat 5.8s ease-in-out infinite;
+  transition:transform .24s ease,box-shadow .24s ease,border-color .24s ease;
+}
+.serviceRow:nth-child(even) .service{
+  text-align:right;
+  animation-delay:-2.4s;
+}
+.serviceRow:nth-child(3n) .service{
+  animation-delay:-1.2s;
+}
+.service:hover{
+  transform:translateY(-8px) scale(1.025);
+  border-color:rgba(255,248,234,.82);
+  box-shadow:0 26px 62px rgba(0,0,0,.42),0 0 0 1px rgba(255,250,240,.32),0 0 48px rgba(201,149,45,.28);
+}
+.service p{margin:0;color:rgba(23,17,9,.72)}
+@keyframes serviceFloat{
+  0%,100%{transform:translateY(0) scale(1)}
+  50%{transform:translateY(-10px) scale(1.015)}
+}
+@media (prefers-reduced-motion:reduce){
+  .service{animation:none}
+}
+#about{
+  background:#fbf2df;
+  box-shadow:0 0 0 100vmax #fbf2df;
+  padding-bottom:92px;
+}
+#about:after{
+  content:"";
+  position:absolute;
+  left:4%;
+  right:4%;
+  bottom:18px;
+  height:34px;
+  border-bottom:4px solid var(--gold);
+  border-radius:0 0 50% 50%;
+}
+.about{
+  display:grid;
+  grid-template-columns:.72fr 1.28fr;
+  gap:22px;
+  align-items:stretch;
+  min-width:0;
+}
+.aboutPortrait{
+  position:relative;
+  min-height:360px;
+  border:1px solid rgba(201,149,45,.28);
+  border-radius:24px;
+  overflow:hidden;
+  background:#111;
+  box-shadow:0 24px 70px rgba(32,38,48,.14);
+}
+.aboutPortrait img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.aboutPortrait:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,transparent 46%,rgba(8,9,13,.58));
+}
+.aboutLinks{
+  position:absolute;
+  inset:0;
+  z-index:2;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:22px;
+  background:rgba(8,9,13,.72);
+  opacity:0;
+  transform:scale(1.02);
+  transition:opacity .24s ease,transform .24s ease;
+}
+.aboutPortrait:hover .aboutLinks,
+.aboutPortrait:focus-within .aboutLinks{
+  opacity:1;
+  transform:scale(1);
+}
+.aboutLinks a{
+  width:min(220px,100%);
+  border:1px solid rgba(201,149,45,.5);
+  border-radius:999px;
+  padding:9px 13px;
+  color:#fffaf0;
+  background:rgba(201,149,45,.18);
+  text-align:center;
+  font-size:13px;
+  font-weight:850;
+  backdrop-filter:blur(10px);
+  transition:background .18s ease,transform .18s ease;
+}
+.aboutLinks a:hover{
+  background:var(--gold);
+  color:#171109;
+  transform:translateY(-2px);
+}
+.aboutBadge{
+  position:absolute;
+  left:18px;
+  bottom:18px;
+  z-index:1;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid rgba(255,255,255,.24);
+  border-radius:999px;
+  padding:9px 13px;
+  color:#fffaf0;
+  background:rgba(8,9,13,.54);
+  backdrop-filter:blur(10px);
+  font-size:12px;
+  font-weight:850;
+}
+.moroccoStar{
+  width:16px;
+  height:16px;
+  display:block;
+}
+.aboutPanel{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  min-width:0;
+  border:1px solid rgba(201,149,45,.24);
+  border-radius:24px;
+  padding:34px;
+  background:rgba(255,250,240,.72);
+  box-shadow:0 18px 54px rgba(32,38,48,.1);
+}
+.aboutRemote{
+  display:inline-block;
+  position:relative;
+  width:max-content;
+  margin:0 0 20px;
+  color:var(--text);
+  font-size:14px;
+  font-weight:850;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  border-bottom:0;
+}
+.aboutRemote:after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-9px;
+  height:12px;
+  border-bottom:3px solid var(--gold);
+  border-radius:0 0 50% 50%;
+}
+.aboutPanel p{
+  max-width:760px;
+  color:#2c3139;
+  font-size:18px;
+  line-height:1.7;
+}
+.aboutPanel p:last-of-type{margin-bottom:0}
+.aboutLead{
+  position:relative;
+  margin-top:0;
+  padding-left:18px;
+  border-left:4px solid var(--gold);
+  font-weight:700;
+}
+.aboutFocus{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin:22px 0 4px;
+}
+.aboutFocus span{
+  border:1px solid rgba(201,149,45,.32);
+  border-radius:14px;
+  padding:12px;
+  background:rgba(255,255,255,.58);
+  color:#171109;
+  font-size:13px;
+  font-weight:850;
+  text-align:center;
+}
+.toolList{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.toolChip{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  max-width:100%;
+  min-width:0;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:999px;
+  padding:7px 11px 7px 7px;
+  color:#fff;
+  background:var(--tool-color,#171109);
+  box-shadow:0 10px 22px rgba(32,38,48,.06);
+  font-size:12px;
+  font-weight:850;
+  overflow-wrap:anywhere;
+}
+.toolIcon{
+  width:28px;
+  height:28px;
+  display:grid;
+  place-items:center;
+  border-radius:8px;
+  color:#fff;
+  background:transparent;
+  font-size:10px;
+  font-weight:900;
+  line-height:1;
+  letter-spacing:.02em;
+  overflow:hidden;
+}
+.toolIcon img{
+  width:28px;
+  height:28px;
+  object-fit:contain;
+  border-radius:8px;
+}
+.toolMark{display:block}
+.contact{
+  position:relative;
+  overflow:visible;
+  border:1px solid rgba(201,149,45,.24);
+  border-radius:28px;
+  padding:46px;
+  color:var(--text);
+  background:rgba(255,250,240,.74);
+  box-shadow:0 28px 80px rgba(32,38,48,.12);
+}
+.contact:after{
+  content:"";
+  position:absolute;
+  width:260px;
+  height:260px;
+  right:-90px;
+  top:-110px;
+  border-radius:50%;
+  border:1px solid rgba(201,149,45,.18);
+  background:radial-gradient(circle,rgba(255,255,255,.38),transparent 62%);
+  pointer-events:none;
+}
+.contactInner{
+  position:relative;
+  z-index:1;
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  align-items:start;
+  gap:34px;
+}
+.contact .sub{
+  color:#4d5662;
+}
+.contactEmail{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  width:fit-content;
+  margin-top:18px;
+  border-bottom:2px solid var(--gold);
+  color:#171109;
+  font-weight:850;
+}
+.contactPhone{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  width:fit-content;
+  margin-top:12px;
+  color:#4d5662;
+  font-weight:850;
+}
+.contactEmail svg,
+.contactPhone svg{
+  width:18px;
+  height:18px;
+  flex:0 0 auto;
+}
+.contactPhone:hover{
+  color:#171109;
+}
+.contactForm{
+  display:grid;
+  gap:12px;
+  border:1px solid rgba(201,149,45,.24);
+  border-radius:22px;
+  padding:18px;
+  background:rgba(255,250,240,.78);
+  box-shadow:0 18px 44px rgba(32,38,48,.08);
+}
+.contactForm input,
+.contactForm textarea{
+  background:rgba(255,255,255,.9);
+}
+.contactForm textarea{min-height:138px}
+.contactForm button{
+  justify-self:start;
+}
+.formStatus{
+  margin:0;
+  color:#4d5662;
+  font-size:13px;
+  font-weight:750;
+}
+.fieldError{
+  margin:-6px 0 2px;
+  color:#b33024;
+  font-size:12px;
+  font-weight:800;
+}
+.contactForm input.isInvalid,
+.contactForm textarea.isInvalid{
+  border-color:#b33024;
+  box-shadow:0 0 0 3px rgba(179,48,36,.12);
+}
+.chatWidget{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  z-index:55;
+  display:grid;
+  justify-items:end;
+  gap:12px;
+}
+.chatPanel{
+  width:min(360px,calc(100vw - 28px));
+  border:1px solid rgba(20,24,32,.14);
+  border-radius:20px;
+  padding:18px;
+  background:rgba(255,250,240,.96);
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(18px);
+}
+.chatHead{display:flex;align-items:start;justify-content:space-between;gap:14px;margin-bottom:14px}
+.chatHead h3{margin:0 0 4px}
+.chatHead p{margin:0;color:var(--muted);font-size:14px}
+.chatClose{width:34px;height:34px;border:1px solid var(--line);border-radius:50%;background:rgba(20,24,32,.06)}
+.chatForm{display:grid;gap:10px}
+.chatForm .btn{width:100%}
+.chatTrigger{
+  min-width:82px;
+  min-height:52px;
+  border:1px solid rgba(201,149,45,.45);
+  border-radius:999px;
+  padding:10px 16px;
+  color:#171109;
+  background:var(--gold);
+  box-shadow:0 16px 38px rgba(32,38,48,.22);
+  font-weight:850;
+}
+.chatTrigger span{
+  display:inline-block;
+  transform-origin:70% 70%;
+  animation:wave 1.45s ease-in-out infinite;
+}
+@keyframes wave{
+  0%,100%{transform:rotate(0)}
+  20%{transform:rotate(18deg)}
+  40%{transform:rotate(-10deg)}
+  60%{transform:rotate(12deg)}
+  80%{transform:rotate(-4deg)}
+}
+.siteFooter{
+  position:relative;
+  z-index:5;
+  border-top:1px solid rgba(201,149,45,.22);
+  padding:42px 0;
+  color:rgba(255,250,240,.72);
+  background:
+    linear-gradient(90deg,rgba(201,149,45,.22),transparent 28%,rgba(201,149,45,.18)),
+    #050608;
+}
+.siteFooter:before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  height:4px;
+  background:var(--gold);
+}
+.footerInner{
+  display:grid;
+  grid-template-columns:1.1fr auto;
+  align-items:start;
+  gap:24px;
+}
+.footerBrand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.footerMark{
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(201,149,45,.45);
+  border-radius:14px;
+  color:var(--gold);
+  background:rgba(201,149,45,.08);
+  font-weight:900;
+}
+.footerBrand strong{
+  display:block;
+  color:#fffaf0;
+}
+.footerBrand span{
+  display:block;
+  font-size:13px;
+  max-width:360px;
+}
+.footerCredit{
+  color:rgba(255,250,240,.26);
+  font-size:12px;
+  font-weight:400;
+  letter-spacing:.01em;
+}
+.footerSeo{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:42px;
+  margin-top:34px;
+  padding-top:30px;
+  border-top:1px solid rgba(255,255,255,.1);
+}
+.footerSeo h3{
+  margin:0 0 14px;
+  color:#fffaf0;
+  font-size:16px;
+}
+.footerSeo p{
+  margin:0 0 18px;
+  max-width:560px;
+  color:rgba(255,250,240,.64);
+  font-size:13px;
+  line-height:1.7;
+}
+.footerSeoLinks,
+.footerSpecialties{
+  display:grid;
+  gap:9px;
+  align-content:start;
+}
+.footerSeoLinks a,
+.footerSpecialties span{
+  display:block;
+  width:max-content;
+  max-width:100%;
+  color:rgba(255,250,240,.7);
+  font-size:13px;
+  line-height:1.45;
+  font-weight:650;
+}
+.footerSeoLinks a:hover{
+  color:var(--gold);
+}
+.footerBottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  margin-top:28px;
+}
+.footerFollow{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+}
+.footerFollowText{
+  color:rgba(255,250,240,.42);
+  font-size:12px;
+  font-weight:850;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+.footerLinks{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  gap:12px;
+}
+.footerNav{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:10px;
+}
+.footerNav a{
+  color:rgba(255,250,240,.72);
+  font-size:13px;
+  font-weight:800;
+}
+.footerNav a:hover{color:var(--gold)}
+.footerLinks a{
+  width:40px;
+  height:40px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:50%;
+  padding:0;
+  color:#fffaf0;
+  background:rgba(255,255,255,.04);
+  font-size:18px;
+  font-weight:800;
+  transition:background .18s ease,border-color .18s ease,color .18s ease;
+}
+.footerLinks svg,
+.footerLinks img{
+  width:20px;
+  height:20px;
+  display:block;
+}
+.footerLinks img{
+  filter:invert(1);
+}
+.footerLinks a:hover{
+  border-color:var(--gold);
+  color:#171109;
+  background:var(--gold);
+}
+.footerLinks a:hover img{
+  filter:brightness(0) saturate(100%);
+}
+.backToTop{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:70;
+  width:48px;
+  height:48px;
+  display:grid;
+  place-items:center;
+  border:0;
+  border-radius:50%;
+  color:#171109;
+  background:conic-gradient(var(--gold) calc(var(--scroll-progress,0) * 1turn),rgba(255,255,255,.16) 0);
+  box-shadow:0 18px 42px rgba(0,0,0,.26);
+}
+.backToTop:before{
+  content:"";
+  position:absolute;
+  inset:5px;
+  border-radius:50%;
+  background:#fffaf0;
+}
+.backToTop svg{
+  position:relative;
+  z-index:1;
+  width:22px;
+  height:22px;
+}
+.modalBackdrop{
+  position:fixed;
+  inset:0;
+  z-index:60;
+  display:grid;
+  place-items:center;
+  padding:22px;
+  background:rgba(0,0,0,.72);
+}
+.modal{
+  width:min(1040px,96vw);
+  max-height:90vh;
+  overflow:auto;
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:#fffaf0;
+  box-shadow:var(--shadow);
+}
+.modalHead{display:flex;justify-content:space-between;gap:18px;align-items:start;padding:22px;border-bottom:1px solid var(--line)}
+.closeBtn{border:1px solid var(--line);border-radius:999px;background:rgba(20,24,32,.06);color:var(--text);width:40px;height:40px}
+.modalBody{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;padding:22px}
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.gallery img,.gallery video{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;border:1px solid var(--line);background:#111}
+.details{color:var(--muted)}
+.detailRow{display:grid;grid-template-columns:90px 1fr;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
+.detailRow b{color:var(--text)}
+@media (max-width:1560px){
+  .projectRail{
+    position:relative;
+    left:auto;
+    width:100%;
+    height:74px;
+    margin:0 0 14px;
+    overflow:visible;
+  }
+  .projectRail:before{
+    left:0;
+    right:0;
+    top:50%;
+    bottom:auto;
+    width:auto;
+    height:3px;
+    background:
+      radial-gradient(circle,rgba(20,24,32,.14) 0 1px,transparent 1.1px) center/6px 3px repeat-x;
+  }
+  .railItem{
+    top:50%;
+    left:50%;
+    width:178px;
+    --rail-depth:0px !important;
+    --rail-scale:.82;
+    justify-content:center;
+    transform:translate(calc(-50% + (var(--rail-offset) * 170px)),-50%) scale(var(--rail-scale));
+  }
+  .railLabel{width:178px;max-width:178px}
+  .railItem:after{
+    left:50%;
+    top:calc(100% + 8px);
+    bottom:auto;
+    max-width:min(280px,86vw);
+    margin-left:0;
+    transform:translate(-50%,-6px);
+  }
+  .railItem:hover:after,
+  .railItem:focus-visible:after{
+    transform:translate(-50%,0);
+  }
+  .railItem.active{--rail-depth:0px;--rail-scale:1}
+}
+@media (max-width:920px){
+  .navlinks{display:none}
+  .navActions{gap:8px}
+  .navCta{display:none}
+  .headerSocial{display:flex;gap:6px}
+  .headerSocial a{width:34px;height:34px}
+  .headerSocial svg,
+  .headerSocial img{width:16px;height:16px}
+  .iconBtn{display:inline-grid;place-items:center}
+  .mobileMenu{display:none}
+  .mobileMenu.open{
+    position:absolute;
+    left:0;
+    right:0;
+    top:calc(100% + 8px);
+    display:grid;
+    gap:4px;
+    padding:10px;
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:12px;
+    background:rgba(8,8,8,.96);
+    box-shadow:0 18px 44px rgba(0,0,0,.34);
+    backdrop-filter:blur(18px);
+  }
+  .mobileMenu a{
+    min-height:44px;
+    display:flex;
+    align-items:center;
+    border-radius:8px;
+    padding:11px 12px;
+    color:rgba(255,250,240,.78);
+    font-size:14px;
+    font-weight:800;
+  }
+  .mobileMenu a:hover{
+    color:#171109;
+    background:var(--gold);
+  }
+  .heroLayout,.showreelPanel,.workLayout,.about,.modalBody{grid-template-columns:1fr}
+  .heroLayout{
+    gap:24px;
+    padding-top:72vh;
+    padding-bottom:12vh;
+  }
+  .heroLayout:before{inset:54vh -100vmax 0}
+  .heroGlass{width:min(760px,100%)}
+  .heroGlass h1{font-size:clamp(40px,7.6vw,68px);line-height:.97}
+  .heroFrame{
+    width:min(560px,100%);
+    justify-self:start;
+  }
+  .aboutPortrait{min-height:320px}
+  .projectNavigator{min-height:auto}
+  .showreelSticky{position:relative;top:auto}
+  .projectTree{gap:70px;padding-top:34px}
+  .projectSegmentSvg{display:none}
+  .projectBranch{
+    min-height:600px;
+    display:block;
+    padding-left:24px;
+    padding-right:24px;
+    text-align:center;
+  }
+  .projectBranch:before,
+  .projectBranch:nth-child(even):before{
+    display:none;
+  }
+  .projectBranch:after{display:none}
+  .projectSystem,
+  .projectBranch:nth-child(even) .projectSystem{
+    width:min(760px,88vw);
+    margin:0 auto;
+    justify-self:auto;
+  }
+  .projectSystemOrbit{
+    inset:50%;
+    width:86%;
+    aspect-ratio:1;
+    transform:translate(-50%,-50%);
+  }
+  .projectSystemOrbit:before,
+  .projectSystemOrbit:after{display:none}
+  .projectPlanet{width:68%}
+  .projectResource{
+    --resource-radius:clamp(194px,37vw,298px);
+    margin:-29px 0 0 -29px;
+  }
+  .projectBranchLabel,
+  .projectBranch:nth-child(even) .projectBranchLabel{
+    position:relative;
+    width:min(560px,100%);
+    margin:0 auto 18px;
+    padding:22px;
+    text-align:left;
+  }
+  .showreelCarousel{min-height:680px}
+  .showreelPanel{width:min(500px,76vw)}
+  .projectOrbitCircle{--orbit-radius:min(360px,39vw);width:min(720px,78vw)}
+  .projectInfoCircle{width:min(260px,62%);padding:28px}
+  .projectCircleDemo:hover .projectInfoCircle,
+  .projectCircleDemo:focus-within .projectInfoCircle{transform:translate(20%,-20%) rotate(0) scale(1)}
+  .projectHint{right:12px;top:auto;bottom:12px;transform:none}
+  .projectHint:hover{transform:translateY(-2px)}
+  .heroFrame{max-width:560px}
+  .contactInner{grid-template-columns:1fr}
+}
+@media (max-width:680px){
+  .navin{gap:12px;padding:12px 0}
+  .brand > span:not(.mark){display:none}
+  .mark{width:40px;height:40px;flex-basis:40px}
+  .jobStrip{font-size:10px;letter-spacing:.12em}
+  .hero{min-height:0}
+  .heroBg{top:78px;height:calc(100vh - 78px)}
+  .heroBg video{
+    object-fit:cover;
+    object-position:center;
+  }
+  .nav.isScrolled ~ .hero .heroBg{top:58px;height:calc(100vh - 58px)}
+  .heroLayout{margin-top:0;padding-top:68vh;padding-bottom:12vh}
+  .heroLayout:before{inset:50vh -100vmax 0}
+  .heroGlass h1{font-size:clamp(34px,10.5vw,48px);line-height:1}
+  .heroGlass .lead{font-size:17px;line-height:1.5;margin-bottom:22px}
+  .roleLine{font-size:10px;letter-spacing:.1em;line-height:1.5}
+  .heroFrame{width:100%;max-width:none;border-radius:8px}
+  .grid{grid-template-columns:1fr}
+  .service{width:100%}
+  .serviceRow:nth-child(even) .service{text-align:left}
+  #about{padding-top:44px;padding-bottom:68px}
+  #about:after{left:7%;right:7%;bottom:16px}
+  .about{gap:16px}
+  .aboutPortrait{
+    min-height:0;
+    aspect-ratio:4 / 5;
+    border-radius:16px;
+  }
+  .aboutPanel{
+    border-radius:16px;
+    padding:22px 18px;
+  }
+  .aboutRemote{
+    width:auto;
+    max-width:100%;
+    font-size:11px;
+    line-height:1.35;
+    letter-spacing:.06em;
+  }
+  .aboutPanel p{
+    max-width:none;
+    font-size:16px;
+    line-height:1.58;
+  }
+  .aboutLead{
+    padding-left:14px;
+    border-left-width:3px;
+  }
+  .aboutFocus{grid-template-columns:1fr}
+  .aboutFocus span{padding:10px}
+  .toolList{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(44px,1fr));
+    gap:8px;
+    margin-top:18px;
+  }
+  .toolChip{
+    width:44px;
+    min-height:44px;
+    justify-content:center;
+    justify-self:center;
+    border-radius:12px;
+    padding:8px;
+    white-space:normal;
+  }
+  .toolName{display:none}
+  .projectTree{gap:52px}
+  .projectBranch{
+    min-height:500px;
+    padding-left:20px;
+    padding-right:20px;
+    text-align:center;
+  }
+  .projectTree:before,
+  .projectBranch:after{display:none}
+  .projectBranch:before,
+  .projectBranch:nth-child(even):before{display:none}
+  .projectSystem,
+  .projectBranch:nth-child(even) .projectSystem{
+    width:min(500px,calc(100vw - 40px));
+    margin:0 auto;
+  }
+  .projectSystemOrbit{width:88%}
+  .projectResource{
+    --resource-radius:clamp(150px,37vw,214px);
+    width:44px;
+    margin:-22px 0 0 -22px;
+    border-width:3px;
+  }
+  .projectPlanet{width:68%;border-width:7px}
+  .projectBranchLabel,
+  .projectBranch:nth-child(even) .projectBranchLabel{width:100%}
+  .projectBranchLabel{margin-left:auto;margin-right:auto;padding:22px 20px 24px}
+  .projectBranchLabel strong{font-size:24px}
+  .projectBranchLabel p{font-size:14px}
+  .showreelSticky{width:min(100%,92vw)}
+  .showreelCarousel{min-height:600px}
+  .showreelPanel{width:min(390px,78vw)}
+  .projectOrbitCircle{--orbit-radius:min(250px,40vw);width:min(500px,80vw)}
+  .projectDotLabel{display:none}
+  .projectInfoCircle{
+    left:50%;
+    bottom:-126px;
+    width:min(310px,86vw);
+    min-height:176px;
+    aspect-ratio:auto;
+    border-radius:24px;
+    padding:22px;
+    transform:translate(-50%,24px) rotate(0) scale(.96);
+    transform-origin:center;
+  }
+  .projectCircleDemo:hover .projectInfoCircle,
+  .projectCircleDemo:focus-within .projectInfoCircle{transform:translate(-50%,0) rotate(0) scale(1)}
+  .projectHint{right:10px;bottom:10px;padding:6px 9px 6px 6px}
+  .projectHintArrow{width:24px;height:24px;font-size:16px}
+  .sectionTop{display:block}
+  .projectRail{height:64px}
+  .railItem{width:142px;--rail-scale:.8;transform:translate(calc(-50% + (var(--rail-offset) * 134px)),-50%) scale(var(--rail-scale))}
+  .railLabel{width:142px;max-width:142px;padding:8px 11px;font-size:12px}
+  .railItem.active{--rail-scale:.94}
+  .railItem.active .railLabel{min-height:42px;width:152px;max-width:152px;font-size:13px}
+  .siteFooter{padding:34px 0}
+  .footerInner{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:20px;
+    justify-items:stretch;
+  }
+  .footerBrand{
+    width:100%;
+    order:1;
+  }
+  .footerBrand span{
+    display:block;
+  }
+  .footerSeo p{
+    display:none;
+  }
+  .footerNav{
+    order:2;
+    width:100%;
+    flex-wrap:nowrap;
+    justify-content:space-between;
+    gap:10px;
+    overflow-x:auto;
+    padding-bottom:2px;
+  }
+  .footerNav a{
+    flex:0 0 auto;
+    border:0;
+    border-radius:0;
+    padding:0;
+    background:transparent;
+  }
+  .footerSeo{
+    grid-template-columns:1fr;
+    gap:24px;
+    margin-top:24px;
+    padding-top:24px;
+  }
+  .footerSeo h3{
+    margin-bottom:10px;
+    font-size:14px;
+  }
+  .footerSeoLinks,
+  .footerSpecialties{
+    grid-template-columns:1fr;
+    gap:7px;
+  }
+  .footerBottom{
+    display:flex;
+    flex-direction:column-reverse;
+    align-items:flex-start;
+    gap:18px;
+    margin-top:26px;
+  }
+  .footerFollow{
+    width:100%;
+    display:grid;
+    gap:10px;
+  }
+  .footerLinks{justify-content:flex-start}
+  .footerCredit{
+    display:block;
+    width:100%;
+    padding-top:16px;
+    border-top:1px solid rgba(255,255,255,.1);
+  }
+  .contact{padding:28px}
+  .contactForm{width:100%}
+  .contactForm button{
+    width:100%;
+    justify-self:stretch;
+  }
+  .gallery{grid-template-columns:1fr}
+  .chatWidget{right:14px;bottom:14px}
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+  <input type="hidden" name="form-name" value="contact" />
+  <input name="title" />
+  <input name="email" />
+  <textarea name="message"></textarea>
+</form>
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+const projects=[
+{title:'Aastra - 3D Virtual Influencer & Merch Campaign',category:'3D Character / Virtual Influencer / Fashion & Merch',desc:'A 3D virtual influencer project focused on digital character production, fashion visuals, motion capture workflow and short-form social content across multiple campaign themes.',role:'3D Character Artist / Digital Fashion Artist / Motion Designer / Video Editor',tools:'Character Creator 4, iClone 8, Blender, CLO 3D, Substance Painter, Rokoko Studio Pro 2, After Effects, Premiere Pro, Photoshop',skills:'3D character creation, digital fashion, clothing simulation, posing, motion capture, rendering, compositing, social media video editing',images:['assets/images/aastra-01-1-png.webp','assets/images/aastra-02-1-png.webp','assets/images/aastra-03-1-png.webp','assets/images/aastra-01-2-png.webp','assets/images/aastra-02-2-png.webp','assets/images/aastra-03-2-png.webp'],videos:[['assets/Content/Aastra/3D video/Final.mp4','assets/posters/aastra-main.jpg'],['assets/Content/Aastra/3D Ai animation/Fashion Transition.mp4','assets/posters/aastra-fashion-transition.jpg'],['assets/Content/Aastra/3D video/outfit showcase.mp4','assets/posters/aastra-summer-mode.jpg'],['assets/Content/Aastra/3D video/aastra_dancing.mp4','assets/posters/aastra-easter.jpg']],featured:true,note:'Featured'},
+{title:'Magiclear Sunscreen Trailer',category:'3D Product Animation / Beauty Product Trailer',desc:'A cinematic sunscreen product trailer created for Magiclear, using clean skincare visuals, water-inspired freshness, soft lighting and smooth product motion.',role:'3D Artist / Motion Designer / Video Editor',tools:'Blender, Substance Painter, Premiere Pro, After Effects',skills:'3D product animation, texturing, cinematic lighting, camera movement, beauty advertising visuals, editing, compositing',images:[],videos:[['assets/videos/sunscreen cream.mp4','assets/posters/magiclear-sunscreen.jpg']],featured:true,note:'Featured'},
+{title:'Alinea Interior Visualization',category:'3D Interior Visualization / Furniture & Home Decor',desc:'Interior renderings created for Alinea, including bedroom and living room scenes designed to present furniture and home decor in warm lifestyle environments.',role:'3D Visualizer / Interior Rendering Artist',tools:'Blender, Photoshop',skills:'Interior visualization, furniture rendering, scene styling, realistic lighting, material work, commercial lifestyle rendering',images:['assets/images/alinea-front-2-jpg.webp','assets/images/alinea-front-jpg-jpg.webp','assets/images/alinea-01-1-jpg.webp','assets/images/alinea-v3-02-jpg.webp'],videos:[],featured:true,note:'Featured'},
+{title:'Option France - Tableware & Lifestyle Product Renders',category:'3D Product Visualization / Lifestyle Product Rendering',desc:'Product renderings created for Option in France, focused on elegant tableware, glassware, floral arrangements and event styling, with lifestyle scenes and close-up details.',role:'3D Visualizer / Product Rendering Artist',tools:'Blender, Substance Painter, Photoshop',skills:'3D product rendering, lifestyle visualization, materials, lighting, commercial composition, table styling, close-up detailing',images:['assets/images/option-france-01-v3-1-jpg.webp','assets/images/option-france-02-4k-jpg.webp','assets/images/option-france-03-v2-jpg.webp','assets/images/option-france-closeup-jpg-jpg.webp','assets/images/option-france-front-jpg-1-jpg.webp','assets/images/option-france-top-v2-jpg.webp'],videos:[],featured:true,note:'Featured'},
+{title:'Travel Suitcase Product Visualization',category:'3D Product Visualization / Product Animation',desc:'A commercial 3D product visualization project for a travel brand producing suitcases, including product renders and a short animation showcasing details and materials.',role:'3D Artist at Wonder Partner',tools:'Blender, Substance Painter, Photoshop, After Effects',skills:'Hard-surface product visualization, product rendering, texturing, studio lighting, product animation, commercial presentation',images:['assets/images/suitcase-01-jpg.webp','assets/images/suitcase-02-jpg.webp','assets/images/suitcase-03-jpg.webp','assets/images/suitcase-04-jpg.webp'],videos:[['assets/videos/Video.mp4','assets/posters/suitcase-animation.jpg']],featured:true,note:'Featured'},
+{title:'Dolce & Gabbana The One - Spec Perfume Ad',category:'3D Product Animation / Luxury Spec Ad',desc:'A short luxury perfume concept ad exploring golden tones, reflective materials, slow cinematic camera movement and premium composition. Presented as a spec project.',role:'3D Artist / Motion Designer / Video Editor',tools:'Blender, After Effects, Premiere Pro',skills:'Luxury product visualization, reflective materials, cinematic lighting, camera animation, editing, brand-style advertising',images:[],videos:[['assets/videos/parfume.mp4','assets/posters/perfume-spec.jpg']],featured:false,note:'Spec'},
+{title:'Carrefour Jardin AI Video Ads',category:'AI Video Ads / Retail & Lifestyle Advertising',desc:'A set of AI-assisted video ads for Carrefour Jardin, focused on outdoor lifestyle, garden products and seasonal retail-style social promotion.',role:'AI Video Creator / Creative Editor / Motion Designer',tools:'AI video tools, Premiere Pro, After Effects',skills:'AI ad concepting, visual storytelling, social media editing, retail campaign content',images:[],videos:[['assets/Content/Ai ads for carrefour france/Final.mp4','assets/posters/carrefour-jardin-01.jpg'],['assets/Content/Ai ads for carrefour france/Final-2.mp4','assets/posters/carrefour-jardin-02.jpg']],featured:false,note:'AI Ads'},
+{title:'Astronaut Phone VFX',category:'VFX / 3D Compositing / Personal Work',desc:'A personal VFX experiment combining live-action footage with a 3D astronaut scene, creating a mixed-reality effect using 3D integration and compositing.',role:'3D Artist / VFX Artist / Video Editor',tools:'Blender, After Effects, Premiere Pro',skills:'VFX compositing, live-action + CGI, 3D integration, camera matching, lighting match, cinematic editing',images:[],videos:[['assets/videos/astroun.mp4','assets/posters/astronaut-vfx-01.jpg'],['assets/videos/fina waving astro.mp4','assets/posters/astronaut-vfx-02.jpg']],featured:false,note:'VFX'},
+{title:'Motion Graphics Experiments',category:'After Effects / Motion Design Foundations',desc:'Course-based motion design exercises focused on cinematic titles, documentary-style graphics, collage animation, typography, transitions and visual pacing.',role:'Motion Designer',tools:'Adobe After Effects',skills:'Kinetic typography, transitions, layout animation, timing, documentary graphics, compositing foundations',images:[],videos:[['assets/2d motion/Plane.mp4','assets/posters/motion-plane.jpg'],['assets/2d motion/documentry.mp4','assets/posters/motion-documentary.jpg'],['assets/2d motion/Comp 1.mp4','assets/posters/motion-comp.jpg']],featured:false,note:'Motion'}
+];
+
+const categories=['All','Featured','3D Product','Virtual Influencer','Interior','AI Ads','VFX','Motion Graphics'];
+const heroReel=[
+  {src:'assets/Showreel.mp4',label:'Showreel'}
+];
+const showcaseItems=projects
+  .filter(project=>project.videos?.length || project.images?.length)
+  .map(project=>({
+    title:project.title,
+    category:project.category,
+    desc:project.desc,
+    media:[
+      ...(project.videos||[]).map(([src,poster])=>({type:'video',src,poster})),
+      ...(project.images||[]).map(src=>({type:'img',src}))
+    ]
+  }));
+const services=[
+  ['3D Product Ads','Cinematic product trailers, clean renders, packaging shots and social-ready product videos.'],
+  ['Virtual Influencer Content','3D character visuals, digital fashion, motion capture workflows, merch visuals and short-form content.'],
+  ['Interior & Lifestyle Renders','Furniture, home decor, tableware and lifestyle scenes designed for commercial presentation.'],
+  ['AI Video Ads','Fast campaign concepts, AI-assisted visuals and edited ads for social media.'],
+  ['VFX & CGI Integration','Creative live-action plus CGI experiments, compositing and visual effects.'],
+  ['Motion Graphics','Title animation, typography, transitions, campaign graphics and finishing touches.']
+];
+const footerServiceLinks=[
+  ['3D product animation','#project-magiclear-sunscreen-trailer'],
+  ['Virtual influencer content','#project-aastra-3d-virtual-influencer-and-merch-campaign'],
+  ['Interior visualization','#project-alinea-interior-visualization'],
+  ['3D product rendering','#project-option-france-tableware-and-lifestyle-product-renders'],
+  ['Luxury spec ads','#project-dolce-and-gabbana-the-one-spec-perfume-ad'],
+  ['AI video ads','#project-carrefour-jardin-ai-video-ads'],
+  ['VFX compositing','#project-astronaut-phone-vfx'],
+  ['Motion graphics','#project-motion-graphics-experiments']
+];
+const specialties=[
+  'Blender product animation',
+  'CGI advertising visuals',
+  'AI-assisted video ads',
+  'Virtual influencer campaigns',
+  'Digital fashion and CLO 3D',
+  'Motion capture workflows',
+  'After Effects compositing',
+  'Social media campaign videos'
+];
+const navItems=[
+  ['About','about'],
+  ['My Projects','showreel'],
+  ['Services','services']
+];
+const portfolioEmail='abrill.akram@gmail.com';
+const portfolioWhatsApp='https://wa.me/qr/B5SMEZTLKUIGC1';
+const portfolioInstagram='https://www.instagram.com/akram.3dart/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPNTY3MDY3MzQzMzUyNDI3AAGnM9Vd1TQZelkrfatkjgn5h8dMecNPk2rMTNji5knWsVmpo34bE0f20yRoAD8_aem_JD61i5r7GSGILmNl5jbK5w';
+const portfolioPhone='+212 707-191694';
+const portfolioPhoneHref='tel:+212707191694';
+const slugify=text=>text.toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+
+function mediaThumb(project){
+  if(project.images?.length) return {type:'img',src:project.images[0]};
+  if(project.videos?.length) return {type:'video',src:project.videos[0][0],poster:project.videos[0][1]};
+  return null;
+}
+function matches(project,active){
+  if(active==='All') return true;
+  if(active==='Featured') return project.featured;
+  const text=(project.title+' '+project.category+' '+project.desc).toLowerCase();
+  if(active==='3D Product') return /product|tableware|suitcase|sunscreen|perfume/.test(text);
+  if(active==='Virtual Influencer') return /virtual influencer|aastra|fashion/.test(text);
+  if(active==='Interior') return /interior|alinea|furniture/.test(text);
+  if(active==='AI Ads') return /ai video|ai-assisted|ai ads/.test(text);
+  if(active==='VFX') return text.includes('vfx');
+  if(active==='Motion Graphics') return /motion graphics|after effects/.test(text);
+  return true;
+}
+function scrollTo(id){
+  document.getElementById(id)?.scrollIntoView({behavior:'smooth'});
+}
+function PreviewMedia({project,large=false}){
+  const media=mediaThumb(project);
+  if(!media) return null;
+  if(media.type==='video'){
+    return <video muted loop playsInline preload="metadata" poster={media.poster} onMouseEnter={e=>e.currentTarget.play()} onMouseLeave={e=>{e.currentTarget.pause();e.currentTarget.currentTime=0;}}>
+      <source src={media.src} type="video/mp4" />
+    </video>;
+  }
+  return <img src={media.src} alt={large ? `${project.title} featured preview` : project.title} loading="lazy" />;
+}
+function Nav(){
+  const [open,setOpen]=React.useState(false);
+  const [scrolled,setScrolled]=React.useState(false);
+  const navRef=React.useRef(null);
+  React.useEffect(()=>{
+    const onScroll=()=>setScrolled(window.scrollY>8);
+    onScroll();
+    window.addEventListener('scroll',onScroll,{passive:true});
+    return ()=>window.removeEventListener('scroll',onScroll);
+  },[]);
+  React.useEffect(()=>{
+    if(!open) return;
+    const onPointerDown=event=>{
+      if(navRef.current && !navRef.current.contains(event.target)) setOpen(false);
+    };
+    window.addEventListener('pointerdown',onPointerDown);
+    return ()=>window.removeEventListener('pointerdown',onPointerDown);
+  },[open]);
+  return <nav className={`nav ${scrolled?'isScrolled':''}`}>
+    <div className="jobStrip">3D Artist / AI Video Creator / Motion Designer</div>
+    <div className="wrap navin" ref={navRef}>
+      <a className="brand" href="#top"><span className="mark"><img src="akram-profile.jpeg" alt="" /></span><span>Akram Abril</span></a>
+      <div className="navlinks">{navItems.map(([label,id])=><a key={id} href={`#${id}`}>{label}</a>)}</div>
+      <div className="navActions">
+        <div className="headerSocial" aria-label="Contact links">
+          <a href={`mailto:${portfolioEmail}`} aria-label="Email"><FooterEmailIcon /></a>
+          <a href={portfolioWhatsApp} target="_blank" rel="noreferrer" aria-label="WhatsApp"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/whatsapp.svg" alt="" loading="lazy" /></a>
+          <a href={portfolioInstagram} target="_blank" rel="noreferrer" aria-label="Instagram"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/instagram.svg" alt="" loading="lazy" /></a>
+        </div>
+        <a className="btn primary navCta" href="#contact">Let's connect</a>
+        <button className="iconBtn" onClick={()=>setOpen(!open)} aria-label="Toggle menu" aria-expanded={open}>
+          <span className="menuIcon" aria-hidden="true"><span></span></span>
+        </button>
+      </div>
+      <div className={`mobileMenu ${open?'open':''}`}>
+        {navItems.map(([label,id])=><a key={id} onClick={()=>setOpen(false)} href={`#${id}`}>{label}</a>)}
+        <a className="btn primary" onClick={()=>setOpen(false)} href="#contact">Let's connect</a>
+      </div>
+    </div>
+  </nav>;
+}
+function Hero(){
+  const [scrollProgress,setScrollProgress]=React.useState(0);
+  const [hasScrolled,setHasScrolled]=React.useState(false);
+  const [heroDormant,setHeroDormant]=React.useState(false);
+  const [frameRatio,setFrameRatio]=React.useState('16 / 9');
+  const heroRef=React.useRef(null);
+  const bgVideoRef=React.useRef(null);
+  const frameVideoRef=React.useRef(null);
+  const active=heroReel[0];
+  const syncHeroVideos=React.useCallback((force=false)=>{
+    const bgVideo=bgVideoRef.current;
+    const frameVideo=frameVideoRef.current;
+    if(!bgVideo || !frameVideo || !Number.isFinite(bgVideo.duration)) return;
+    if(bgVideo.readyState<2 || frameVideo.readyState<1) return;
+    const drift=Math.abs(frameVideo.currentTime-bgVideo.currentTime);
+    if(force || drift>.045) frameVideo.currentTime=bgVideo.currentTime;
+    if(!bgVideo.paused && frameVideo.paused){
+      frameVideo.play().catch(()=>{});
+    }
+  },[]);
+  React.useEffect(()=>{
+    let frame=0;
+    const update=()=>{
+      frame=0;
+      const node=heroRef.current;
+      if(!node) return;
+      setHasScrolled(window.scrollY>12);
+      const rect=node.getBoundingClientRect();
+      const distance=Math.min(Math.max(-rect.top,0),window.innerHeight*.72);
+      setScrollProgress(distance/(window.innerHeight*.72));
+      setHeroDormant(rect.bottom<80);
+    };
+    const onScroll=()=>{
+      if(frame) return;
+      frame=window.requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener('scroll',onScroll,{passive:true});
+    window.addEventListener('resize',onScroll);
+    return ()=>{
+      if(frame) window.cancelAnimationFrame(frame);
+      window.removeEventListener('scroll',onScroll);
+      window.removeEventListener('resize',onScroll);
+    };
+  },[]);
+  React.useEffect(()=>{
+    let syncFrame=0;
+    const tick=()=>{
+      syncHeroVideos();
+      syncFrame=window.requestAnimationFrame(tick);
+    };
+    syncHeroVideos(true);
+    syncFrame=window.requestAnimationFrame(tick);
+    return ()=>window.cancelAnimationFrame(syncFrame);
+  },[syncHeroVideos]);
+  React.useEffect(()=>{
+    const bgVideo=bgVideoRef.current;
+    const frameVideo=frameVideoRef.current;
+    if(!bgVideo) return;
+    if(heroDormant){
+      bgVideo.pause();
+      if(frameVideo) frameVideo.pause();
+    }else{
+      bgVideo.play().catch(()=>{});
+      if(frameVideo && hasScrolled) frameVideo.play().catch(()=>{});
+    }
+  },[heroDormant,hasScrolled]);
+  const heroStyle={
+    '--hero-progress':scrollProgress,
+    '--hero-overlay':hasScrolled ? .34 : 0,
+    '--hero-video-opacity':hasScrolled ? Math.max(.28,1 - (1.02 * scrollProgress)) : 1,
+    '--copy-opacity':hasScrolled ? 1 : 0,
+    '--copy-y':hasScrolled ? '0px' : '54px',
+    '--frame-ratio':frameRatio
+  };
+  return <header id="top" ref={heroRef} className={`hero ${hasScrolled?'hasScrolled':''}`} style={heroStyle}>
+    <div className={`heroBg ${heroDormant?'isDormant':''}`} aria-hidden="true">
+      <video ref={bgVideoRef} key={active.src} autoPlay muted loop playsInline preload="auto" onLoadedData={()=>syncHeroVideos(true)} onPlay={()=>syncHeroVideos(true)}>
+        <source src={active.src} type="video/mp4" />
+      </video>
+    </div>
+    <div className="wrap heroLayout">
+      <div className={`heroGlass ${hasScrolled?'isVisible':''}`}>
+        <p className="roleLine">3D Artist / AI Video Creator / Motion Designer</p>
+        <h1><span className="highlight">Cinematic</span> <span className="highlight">3D</span> & <span className="highlight">AI visuals</span> for <span className="highlight">brands</span> that need to stand out.</h1>
+        <p className="lead">I create product films, virtual influencer content, CGI scenes, AI ads, and motion design built for campaigns, launches, and social media.</p>
+      </div>
+      <div className={`heroFrame ${hasScrolled?'isVisible':''}`} aria-hidden="true">
+        <video ref={frameVideoRef} key={`${active.src}-frame`} autoPlay muted loop playsInline preload="auto" onLoadedMetadata={e=>{
+          const video=e.currentTarget;
+          if(video.videoWidth && video.videoHeight) setFrameRatio(`${video.videoWidth} / ${video.videoHeight}`);
+          syncHeroVideos(true);
+        }} onLoadedData={()=>syncHeroVideos(true)} onPlay={()=>syncHeroVideos(true)} onSeeked={()=>syncHeroVideos()}>
+          <source src={active.src} type="video/mp4" />
+        </video>
+      </div>
+    </div>
+  </header>;
+}
+function ProjectSegment({index}){
+  const fromX=index % 2 === 0 ? 83 : 17;
+  const toX=index % 2 === 0 ? 17 : 83;
+  const bend=index % 2 === 0 ? -18 : 18;
+  const path=`M ${fromX} 0 C ${fromX + bend} 160, ${toX - bend} 520, ${toX} 660`;
+  return <svg className="projectSegmentSvg" viewBox="0 0 100 660" preserveAspectRatio="none" aria-hidden="true">
+    <path className="projectConnectionShadow" d={path} />
+    <path className="projectConnectionLine" d={path} />
+  </svg>;
+}
+function Icon({type}){
+  if(type==='sound-on') return <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7"></path><path d="M18.5 5.5a9 9 0 0 1 0 13"></path></svg>;
+  if(type==='sound-off') return <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5z"></path><path d="m22 9-6 6"></path><path d="m16 9 6 6"></path></svg>;
+  return <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M8 3H3v5"></path><path d="M16 3h5v5"></path><path d="M21 16v5h-5"></path><path d="M3 16v5h5"></path></svg>;
+}
+function ProjectSystem({item,index,isLast,onOpenLightbox}){
+  const [mediaIndex,setMediaIndex]=React.useState(0);
+  const [videoPlaying,setVideoPlaying]=React.useState(false);
+  const [muted,setMuted]=React.useState(true);
+  const [isVisible,setIsVisible]=React.useState(false);
+  const systemRef=React.useRef(null);
+  const activeVideoRef=React.useRef(null);
+  const activeMedia=item.media[mediaIndex] || item.media[0];
+  const imageItems=item.media.filter(media=>media.type==='img');
+  const label=item.title.split(' - ')[0];
+  React.useEffect(()=>setVideoPlaying(false),[activeMedia?.src]);
+  React.useEffect(()=>{
+    const video=activeVideoRef.current;
+    if(video) video.muted=muted;
+  },[muted,activeMedia?.src]);
+  React.useEffect(()=>{
+    const onFullscreenChange=()=>{
+      const video=activeVideoRef.current;
+      if(video && !document.fullscreenElement && !document.webkitFullscreenElement){
+        video.controls=false;
+      }
+    };
+    document.addEventListener('fullscreenchange',onFullscreenChange);
+    document.addEventListener('webkitfullscreenchange',onFullscreenChange);
+    return ()=>{
+      document.removeEventListener('fullscreenchange',onFullscreenChange);
+      document.removeEventListener('webkitfullscreenchange',onFullscreenChange);
+    };
+  },[]);
+  React.useEffect(()=>{
+    const node=systemRef.current;
+    if(!node) return;
+    const observer=new IntersectionObserver(entries=>{
+      setIsVisible(entries[0].isIntersecting);
+    },{threshold:.38,rootMargin:'120px 0px'});
+    observer.observe(node);
+    return ()=>observer.disconnect();
+  },[]);
+  React.useEffect(()=>{
+    const video=activeVideoRef.current;
+    if(!video || activeMedia.type!=='video') return;
+    if(isVisible){
+      video.play().catch(()=>{});
+    }else{
+      video.pause();
+    }
+  },[isVisible,activeMedia?.src,activeMedia?.type]);
+  const playActiveVideo=()=>{
+    const video=activeVideoRef.current;
+    if(video) video.play();
+  };
+  const toggleSound=()=>{
+    const video=activeVideoRef.current;
+    if(!video) return;
+    const nextMuted=!muted;
+    video.muted=nextMuted;
+    setMuted(nextMuted);
+    if(!nextMuted) video.play().catch(()=>{});
+  };
+  const openVideoFullscreen=()=>{
+    const video=activeVideoRef.current;
+    if(!video) return;
+    video.controls=true;
+    video.muted=muted;
+    video.play().catch(()=>{});
+    if(video.requestFullscreen){
+      video.requestFullscreen();
+    }else if(video.webkitEnterFullscreen){
+      video.webkitEnterFullscreen();
+    }else if(video.webkitRequestFullscreen){
+      video.webkitRequestFullscreen();
+    }
+  };
+  const openActiveMediaFullscreen=()=>{
+    if(activeMedia.type==='video'){
+      openVideoFullscreen();
+      return;
+    }
+    openImageFrame(activeMedia.src);
+  };
+  const openImageFrame=src=>{
+    const imageIndex=imageItems.findIndex(media=>media.src===src);
+    if(imageIndex>=0) onOpenLightbox({title:item.title,images:imageItems,index:imageIndex});
+  };
+  return <article id={`project-${slugify(item.title)}`} className="projectBranch">
+    {!isLast && <ProjectSegment index={index} />}
+    <div className="projectBranchLabel">
+      <span>{item.category}</span>
+      <strong>{label}</strong>
+      <p>{item.desc}</p>
+    </div>
+    <div className="projectSystem" ref={systemRef}>
+      <div className="projectSystemOrbit" aria-hidden="true"></div>
+      <div className="projectPlanet">
+        {activeMedia.type==='video'
+          ? <React.Fragment>
+              <video ref={activeVideoRef} key={activeMedia.src} muted={muted} loop playsInline preload="auto" poster={activeMedia.poster} onClick={openVideoFullscreen} onLoadedData={event=>{event.currentTarget.muted=muted;if(isVisible) event.currentTarget.play().catch(()=>{});}} onPlay={()=>setVideoPlaying(true)} onPause={()=>setVideoPlaying(false)}><source src={activeMedia.src} type="video/mp4" /></video>
+              {!videoPlaying && <button className="mediaPlay" onClick={playActiveVideo} aria-label={`Play ${item.title}`}><span className="mediaPlayIcon" aria-hidden="true"></span></button>}
+              <div className="mediaControls">
+                <button className="mediaControl" onClick={toggleSound} aria-label={muted ? `Unmute ${item.title}` : `Mute ${item.title}`} title={muted ? 'Sound off' : 'Sound on'}><Icon type={muted ? 'sound-off' : 'sound-on'} /></button>
+                <button className="mediaControl" onClick={openVideoFullscreen} aria-label={`Open ${item.title} video fullscreen`} title="Fullscreen"><Icon type="fullscreen" /></button>
+              </div>
+            </React.Fragment>
+          : <button className="mediaZoom" onClick={()=>openImageFrame(activeMedia.src)} aria-label={`Open ${item.title} images fullscreen`}>
+              <img key={activeMedia.src} src={activeMedia.src} alt={`${item.title} asset ${mediaIndex+1}`} loading="lazy" />
+            </button>
+        }
+        {activeMedia.type==='img' && <div className="mediaControls">
+          <button className="mediaControl" onClick={openActiveMediaFullscreen} aria-label={`Open ${item.title} image fullscreen`} title="Fullscreen"><Icon type="fullscreen" /></button>
+        </div>}
+      </div>
+      {item.media.map((media,resourceIndex)=>{
+        const angle=-90 + (resourceIndex * (360 / item.media.length));
+        return <button key={`${media.src}-${resourceIndex}`} className={`projectResource ${resourceIndex===mediaIndex?'active':''}`} style={{'--resource-angle':`${angle}deg`}} onClick={()=>setMediaIndex(resourceIndex)} aria-label={`Show ${item.title} resource ${resourceIndex+1}`}>
+          {media.type==='video'
+            ? <video muted playsInline preload="metadata" poster={media.poster}><source src={media.src} type="video/mp4" /></video>
+            : <img src={media.src} alt="" loading="lazy" />
+          }
+          <span className="projectResourceType">{media.type}</span>
+        </button>;
+      })}
+    </div>
+  </article>;
+}
+function Showreel({lightbox,onOpenLightbox,onCloseLightbox,onStepLightbox}){
+  return <section id="showreel" className="wrap projectNavigator">
+    <div className="showreelSticky">
+      <div className="sectionTop"><div><h2>Navigate Through <span className="titleAccent">My Projects</span></h2></div></div>
+      <div className="projectTree">
+        {showcaseItems.map((item,index)=><ProjectSystem key={item.title} item={item} index={index} isLast={index===showcaseItems.length-1} onOpenLightbox={onOpenLightbox} />)}
+      </div>
+    </div>
+  </section>;
+}
+function ImageLightbox({lightbox,onClose,onStep}){
+  if(!lightbox) return null;
+  const image=lightbox.images[lightbox.index];
+  return <div className="lightbox" onClick={onClose} role="dialog" aria-modal="true" aria-label="Fullscreen image gallery">
+    <div className="lightboxFrame" onClick={event=>event.stopPropagation()}>
+      <button className="lightboxClose" onClick={onClose} aria-label="Close fullscreen image">Close</button>
+      {lightbox.images.length>1 && <button className="lightboxNav lightboxPrev" onClick={()=>onStep(-1)} aria-label="Previous image">{'<'}</button>}
+      <img src={image.src} alt={`${lightbox.title} fullscreen preview`} />
+      {lightbox.images.length>1 && <button className="lightboxNav lightboxNext" onClick={()=>onStep(1)} aria-label="Next image">{'>'}</button>}
+      {lightbox.images.length>1 && <div className="lightboxCount">{lightbox.index+1} / {lightbox.images.length}</div>}
+    </div>
+  </div>;
+}
+function ProjectCard({project,onOpen}){
+  return <article className="card">
+    <button className="thumb" onClick={()=>onOpen(project)} aria-label={`Open ${project.title}`}>
+      <PreviewMedia project={project} />
+      <span className="tag">{project.note}</span>
+    </button>
+    <div className="projectInfo">
+      <div className="category">{project.category}</div>
+      <h3>{project.title}</h3>
+      <p className="desc">{project.desc}</p>
+      <button className="btn" onClick={()=>onOpen(project)}>View Details</button>
+    </div>
+  </article>;
+}
+function Work(){
+  const [active,setActive]=React.useState('All');
+  const [selected,setSelected]=React.useState(null);
+  const visible=projects.filter(project=>matches(project,active));
+  return <section id="work" className="wrap">
+    <div className="sectionTop"><div><h2>Selected Work</h2><p className="sub">Commercial 3D, product visualization, AI ads, VFX and motion design projects, filtered by project type.</p></div></div>
+    <div className="filters">{categories.map(category=><button key={category} className={`filter ${category===active?'active':''}`} onClick={()=>setActive(category)}>{category}</button>)}</div>
+    <div className="workLayout">
+      <div className="grid">{visible.map(project=><ProjectCard key={project.title} project={project} onOpen={setSelected} />)}</div>
+    </div>
+    {selected && <ProjectModal project={selected} onClose={()=>setSelected(null)} />}
+  </section>;
+}
+function ProjectModal({project,onClose}){
+  React.useEffect(()=>{
+    const onKey=e=>{if(e.key==='Escape') onClose();};
+    window.addEventListener('keydown',onKey);
+    return ()=>window.removeEventListener('keydown',onKey);
+  },[onClose]);
+  const media=[
+    ...(project.videos||[]).map(([src,poster])=>({type:'video',src,poster})),
+    ...(project.images||[]).map(src=>({type:'img',src}))
+  ];
+  return <div className="modalBackdrop" onClick={onClose}>
+    <div className="modal" onClick={e=>e.stopPropagation()} role="dialog" aria-modal="true" aria-label={project.title}>
+      <div className="modalHead">
+        <div><div className="eyebrow">{project.category}</div><h2>{project.title}</h2></div>
+        <button className="closeBtn" onClick={onClose} aria-label="Close">x</button>
+      </div>
+      <div className="modalBody">
+        <div className="gallery">{media.map((item,index)=>item.type==='video'
+          ? <video key={`${item.src}-${index}`} controls playsInline poster={item.poster}><source src={item.src} type="video/mp4" /></video>
+          : <img key={`${item.src}-${index}`} src={item.src} alt={`${project.title} visual ${index+1}`} loading="lazy" />
+        )}</div>
+        <div className="details">
+          <p>{project.desc}</p>
+          <div className="detailRow"><b>Role</b><span>{project.role}</span></div>
+          <div className="detailRow"><b>Tools</b><span>{project.tools}</span></div>
+          <div className="detailRow"><b>Skills</b><span>{project.skills}</span></div>
+          <div className="metaLine">{project.tools.split(', ').slice(0,6).map(tool=><span className="pill" key={tool}>{tool}</span>)}</div>
+        </div>
+      </div>
+    </div>
+  </div>;
+}
+function Services(){
+  return <section id="services" className="wrap">
+    <div className="sectionTop"><div><h2>Services</h2><p className="sub">Built for brands that need premium visuals without always relying on a full physical shoot.</p></div></div>
+    <div className="services">{services.map(([title,text])=><div className="serviceRow" key={title}><div className="service"><h3>{title}</h3><p>{text}</p></div></div>)}</div>
+  </section>;
+}
+function About(){
+  const tools=[
+    {name:'Blender',mark:'BL',color:'#000000',localIcon:'assets/logos/blender-icon.png',icon:'https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/blender.svg'},
+    {name:'Character Creator 4',mark:'CC',color:'#000000',localIcon:'assets/logos/character creator.png',icon:'https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/reallusion.svg'},
+    {name:'iClone 8',mark:'IC',color:'#000000',localIcon:'assets/logos/Iclone 8.png',icon:'https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/reallusion.svg'},
+    {name:'CLO 3D',mark:'CLO',color:'#000000',localIcon:'assets/logos/clo3d-logo.png',icon:'https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/clo3d.svg'},
+    {name:'Substance Painter',mark:'SP',color:'#103000',localIcon:'assets/logos/adobe-substance-3d-painter-icon.png',icon:'https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/adobesubstance3d.svg'},
+    {name:'Rokoko Studio Pro 2',mark:'RK',color:'#000000',localIcon:'assets/logos/Rokoko.png',icon:'https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/rokoko.svg'},
+    {name:'After Effects',mark:'Ae',color:'#000050',localIcon:'assets/logos/adobe-after-effects-icon.png',icon:'https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/adobeaftereffects.svg'},
+    {name:'Premiere Pro',mark:'Pr',color:'#000050',localIcon:'assets/logos/adobe-premiere-pro-icon.png',icon:'https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/adobepremierepro.svg'},
+    {name:'Photoshop',mark:'Ps',color:'#001030',localIcon:'assets/logos/adobe-photoshop-icon.png',icon:'https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/adobephotoshop.svg'}
+  ];
+  return <section id="about" className="wrap">
+    <div className="about">
+      <div className="aboutPortrait">
+        <img src="akram-profile.jpeg" alt="Akram Abril" loading="lazy" />
+        <div className="aboutLinks">
+          <a href="https://wa.me/qr/B5SMEZTLKUIGC1" target="_blank" rel="noreferrer">WhatsApp</a>
+          <a href="mailto:abrill.akram@gmail.com">Email</a>
+          <a href="https://www.instagram.com/akram.3dart/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPNTY3MDY3MzQzMzUyNDI3AAGnM9Vd1TQZelkrfatkjgn5h8dMecNPk2rMTNji5knWsVmpo34bE0f20yRoAD8_aem_JD61i5r7GSGILmNl5jbK5w" target="_blank" rel="noreferrer">Instagram</a>
+          <a href="https://tr.ee/lPjHtRz7jP" target="_blank" rel="noreferrer">Linktree</a>
+        </div>
+        <div className="aboutBadge">
+          <svg className="moroccoStar" viewBox="0 0 100 100" aria-hidden="true">
+            <path d="M50 7 L61 39 H95 L67 59 L78 92 L50 72 L22 92 L33 59 L5 39 H39 Z" fill="none" stroke="#006233" strokeWidth="8" strokeLinejoin="round" />
+          </svg>
+          Based in Morocco
+        </div>
+      </div>
+      <div className="aboutPanel">
+        <p className="aboutRemote">Available for remote projects.</p>
+        <p className="aboutLead">I am Akram Abril, a 3D Artist, AI Video Creator and Motion Designer shaping premium short-form visuals for brands that need more than standard content.</p>
+        <p>I build cinematic product moments, virtual influencer scenes, AI-assisted ads and CGI visuals with a focus on mood, material detail, motion, and campaign-ready delivery.</p>
+        <div className="aboutFocus"><span>Product Films</span><span>CGI Worlds</span><span>AI Campaigns</span></div>
+        <div className="toolList">{tools.map(tool=><span className="toolChip" key={tool.name} style={{'--tool-color':tool.color}}>
+          <span className="toolIcon">
+            {(tool.localIcon||tool.icon) && <img src={tool.localIcon||tool.icon} alt="" loading="lazy" data-fallback-src={tool.icon} onError={event=>{
+              const img=event.currentTarget;
+              if(img.dataset.fallbackSrc && img.src!==img.dataset.fallbackSrc){
+                img.src=img.dataset.fallbackSrc;
+                img.dataset.fallbackSrc='';
+                return;
+              }
+              img.style.display='none';
+              img.nextElementSibling.style.display='block';
+            }} />}
+            <span className="toolMark" style={{display:tool.icon?'none':'block'}}>{tool.mark}</span>
+          </span>
+          <span className="toolName">{tool.name}</span>
+        </span>)}</div>
+      </div>
+    </div>
+  </section>;
+}
+function Contact(){
+  const [form,setForm]=React.useState({title:'',email:'',message:''});
+  const [status,setStatus]=React.useState('');
+  const [errors,setErrors]=React.useState({});
+  const [submitting,setSubmitting]=React.useState(false);
+  const validate=React.useCallback(()=>{
+    const nextErrors={};
+    const title=form.title.trim();
+    const email=form.email.trim();
+    const message=form.message.trim();
+    if(!title) nextErrors.title='Project title is required.';
+    if(!email){
+      nextErrors.email='Email is required.';
+    }else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      nextErrors.email='Enter a valid email address.';
+    }
+    if(!message) nextErrors.message='Message is required.';
+    return nextErrors;
+  },[form]);
+  const update=event=>{
+    const {name,value}=event.target;
+    setForm(current=>({...current,[name]:value}));
+    setErrors(current=>{
+      if(!current[name]) return current;
+      const next={...current};
+      delete next[name];
+      return next;
+    });
+    setStatus('');
+  };
+  const submit=async event=>{
+    event.preventDefault();
+    const nextErrors=validate();
+    setErrors(nextErrors);
+    if(Object.keys(nextErrors).length){
+      setStatus('Please fix the highlighted fields.');
+      return;
+    }
+    setSubmitting(true);
+    setStatus('Sending your message...');
+    const payload=new URLSearchParams({
+      'form-name':'contact',
+      title:form.title.trim(),
+      email:form.email.trim(),
+      message:form.message.trim()
+    });
+    try{
+      const response=await fetch('/',{
+        method:'POST',
+        headers:{'Content-Type':'application/x-www-form-urlencoded'},
+        body:payload.toString()
+      });
+      if(!response.ok) throw new Error('Form submission failed');
+      setForm({title:'',email:'',message:''});
+      setStatus('Message sent. Thank you.');
+    }catch(error){
+      setStatus('Message could not be sent. Please try again or email me directly.');
+    }finally{
+      setSubmitting(false);
+    }
+  };
+  return <section id="contact" className="wrap">
+    <div className="contact">
+      <div className="contactInner">
+        <div>
+          <h2>Build a visual your brand can use.</h2>
+          <p className="sub">For product ads, 3D visuals, AI content, virtual influencer work or social campaigns.</p>
+          <a className="contactEmail" href={`mailto:${portfolioEmail}`}><FooterEmailIcon />{portfolioEmail}</a>
+          <a className="contactPhone" href={portfolioPhoneHref}><PhoneIcon />{portfolioPhone}</a>
+        </div>
+        <form className="contactForm" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={submit} noValidate>
+          <input type="hidden" name="form-name" value="contact" />
+          <p hidden><label>Do not fill this out: <input name="bot-field" /></label></p>
+          <input className={errors.title?'isInvalid':''} name="title" value={form.title} onChange={update} placeholder="Project title" aria-label="Project title" aria-invalid={!!errors.title} aria-describedby={errors.title?'title-error':undefined} maxLength="120" required />
+          {errors.title && <p className="fieldError" id="title-error">{errors.title}</p>}
+          <input className={errors.email?'isInvalid':''} name="email" value={form.email} onChange={update} placeholder="Your email" type="email" aria-label="Your email" aria-invalid={!!errors.email} aria-describedby={errors.email?'email-error':undefined} maxLength="160" required />
+          {errors.email && <p className="fieldError" id="email-error">{errors.email}</p>}
+          <textarea className={errors.message?'isInvalid':''} name="message" value={form.message} onChange={update} placeholder="Tell me about your project" aria-label="Message" aria-invalid={!!errors.message} aria-describedby={errors.message?'message-error':undefined} maxLength="1200" required></textarea>
+          {errors.message && <p className="fieldError" id="message-error">{errors.message}</p>}
+          <button className="btn primary" type="submit" disabled={submitting}>{submitting?'Sending...':'Send'}</button>
+          {status && <p className="formStatus">{status}</p>}
+        </form>
+      </div>
+    </div>
+  </section>;
+}
+function ChatWidget(){
+  const [open,setOpen]=React.useState(false);
+  const [form,setForm]=React.useState({name:'',email:'',message:''});
+  const update=event=>setForm(current=>({...current,[event.target.name]:event.target.value}));
+  const submit=event=>{
+    event.preventDefault();
+    const subject=encodeURIComponent(`Portfolio message from ${form.name || 'a visitor'}`);
+    const body=encodeURIComponent([
+      `Name: ${form.name || '-'}`,
+      `Email: ${form.email || '-'}`,
+      '',
+      form.message || '-'
+    ].join('\n'));
+    window.location.href=`mailto:${portfolioEmail}?subject=${subject}&body=${body}`;
+  };
+  return <div className="chatWidget">
+    {open && <div className="chatPanel" role="dialog" aria-label="Send Akram a message">
+      <div className="chatHead">
+        <div><h3>Hi, send a message</h3><p>It will open your email app ready to send.</p></div>
+        <button className="chatClose" onClick={()=>setOpen(false)} aria-label="Close message form">x</button>
+      </div>
+      <form className="chatForm" onSubmit={submit}>
+        <input name="name" value={form.name} onChange={update} placeholder="Your name" aria-label="Your name" />
+        <input name="email" value={form.email} onChange={update} placeholder="Your email" type="email" aria-label="Your email" />
+        <textarea name="message" value={form.message} onChange={update} placeholder="Tell me about your project" required aria-label="Message"></textarea>
+        <button className="btn primary" type="submit">Send Message</button>
+      </form>
+    </div>}
+    <button className="chatTrigger" onClick={()=>setOpen(current=>!current)} aria-expanded={open} aria-label="Open message form">Hi <span>{String.fromCodePoint(128075)}</span></button>
+  </div>;
+}
+function FooterEmailIcon(){
+  return <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+    <path d="m3 7 9 6 9-6"></path>
+  </svg>;
+}
+function PhoneIcon(){
+  return <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.91.32 1.8.59 2.65a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6.27 6.27l1.25-1.25a2 2 0 0 1 2.11-.45c.85.27 1.74.47 2.65.59A2 2 0 0 1 22 16.92z"></path>
+  </svg>;
+}
+function ArrowUpIcon(){
+  return <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 19V5"></path>
+    <path d="m5 12 7-7 7 7"></path>
+  </svg>;
+}
+function App(){
+  const [lightbox,setLightbox]=React.useState(null);
+  const [scrollProgress,setScrollProgress]=React.useState(0);
+  React.useEffect(()=>{
+    let frame=0;
+    const update=()=>{
+      frame=0;
+      const maxScroll=document.documentElement.scrollHeight-window.innerHeight;
+      setScrollProgress(maxScroll>0 ? Math.min(Math.max(window.scrollY/maxScroll,0),1) : 0);
+    };
+    const onScroll=()=>{
+      if(frame) return;
+      frame=window.requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener('scroll',onScroll,{passive:true});
+    window.addEventListener('resize',onScroll);
+    return ()=>{
+      if(frame) window.cancelAnimationFrame(frame);
+      window.removeEventListener('scroll',onScroll);
+      window.removeEventListener('resize',onScroll);
+    };
+  },[]);
+  const stepLightbox=direction=>setLightbox(current=>{
+    if(!current) return current;
+    return {...current,index:(current.index+direction+current.images.length)%current.images.length};
+  });
+  return <>
+    <Nav />
+    <Hero />
+    <About />
+    <Showreel onOpenLightbox={setLightbox} onCloseLightbox={()=>setLightbox(null)} />
+    <Services />
+    <Contact />
+    <ImageLightbox lightbox={lightbox} onClose={()=>setLightbox(null)} onStep={stepLightbox} />
+    <a className="backToTop" href="#top" aria-label="Back to top" style={{'--scroll-progress':scrollProgress}}><ArrowUpIcon /></a>
+    <footer className="siteFooter">
+      <div className="wrap footerInner">
+        <div className="footerBrand">
+          <div className="footerMark">AK</div>
+          <div><strong>Akram Abril</strong><span>3D Artist, AI Video Creator and Motion Designer creating product films, CGI visuals and campaign-ready content.</span></div>
+        </div>
+        <div className="footerNav">
+          <a href="#about">About</a>
+          <a href="#showreel">My Projects</a>
+          <a href="#services">Services</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+      <div className="wrap footerSeo">
+        <div>
+          <h3>Services linked to portfolio projects</h3>
+          <p>Explore examples of 3D product animation, CGI ads, AI video campaigns, virtual influencer content, motion graphics, VFX compositing, and commercial product rendering.</p>
+          <div className="footerSeoLinks">
+            {footerServiceLinks.map(([label,href])=><a key={href} href={href}>{label}</a>)}
+          </div>
+        </div>
+        <div>
+          <h3>Specialties</h3>
+          <p>Creative production for brands that need campaign-ready visuals, social media video assets, cinematic product moments, and polished CGI content.</p>
+          <div className="footerSpecialties">
+            {specialties.map(item=><span key={item}>{item}</span>)}
+          </div>
+        </div>
+      </div>
+      <div className="wrap footerBottom">
+        <span className="footerCredit">&copy; {new Date().getFullYear()} Portfolio website. Made by Sanaa Abril.</span>
+        <div className="footerFollow">
+          <span className="footerFollowText">Follow me</span>
+          <div className="footerLinks">
+            <a href="mailto:abrill.akram@gmail.com" aria-label="Email"><FooterEmailIcon /></a>
+            <a href="https://wa.me/qr/B5SMEZTLKUIGC1" target="_blank" rel="noreferrer" aria-label="WhatsApp"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/whatsapp.svg" alt="" loading="lazy" /></a>
+            <a href="https://www.instagram.com/akram.3dart/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPNTY3MDY3MzQzMzUyNDI3AAGnM9Vd1TQZelkrfatkjgn5h8dMecNPk2rMTNji5knWsVmpo34bE0f20yRoAD8_aem_JD61i5r7GSGILmNl5jbK5w" target="_blank" rel="noreferrer" aria-label="Instagram"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/instagram.svg" alt="" loading="lazy" /></a>
+            <a href="https://tr.ee/lPjHtRz7jP" target="_blank" rel="noreferrer" aria-label="Linktree"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/linktree.svg" alt="" loading="lazy" /></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </>;
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
