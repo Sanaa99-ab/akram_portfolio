@@ -297,6 +297,7 @@ h1{font-size:clamp(42px,6.8vw,88px);line-height:.94;margin:14px 0 20px;max-width
   transition:none;
 }
 .heroFrame{
+  position:relative;
   width:100%;
   aspect-ratio:var(--frame-ratio,16/9);
   border:1px solid rgba(255,255,255,.28);
@@ -312,6 +313,7 @@ h1{font-size:clamp(42px,6.8vw,88px);line-height:.94;margin:14px 0 20px;max-width
 }
 .heroFrame.isVisible{
   visibility:visible;
+  pointer-events:auto;
 }
 .heroFrame video{
   width:100%;
@@ -319,6 +321,33 @@ h1{font-size:clamp(42px,6.8vw,88px);line-height:.94;margin:14px 0 20px;max-width
   object-fit:contain;
   object-position:center;
   background:#050505;
+}
+.heroSoundBtn{
+  position:absolute;
+  right:12px;
+  bottom:12px;
+  z-index:3;
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(255,255,255,.32);
+  border-radius:50%;
+  padding:0;
+  color:#171109;
+  background:var(--gold);
+  box-shadow:0 14px 34px rgba(0,0,0,.28);
+  transition:transform .18s ease,background .18s ease;
+}
+.heroSoundBtn:hover{
+  transform:translateY(-2px);
+  background:#e0ad48;
+}
+.heroSoundBtn svg{
+  width:19px;
+  height:19px;
+  display:block;
+  stroke:currentColor;
 }
 .heroGlass.isVisible{
   opacity:var(--copy-opacity);
@@ -862,6 +891,12 @@ h2{font-size:clamp(30px,4vw,48px);line-height:1;margin:0;letter-spacing:0}
   height:100%;
   object-fit:cover;
   background:#111;
+}
+.originalFormatProject .projectPlanet video,
+.originalFormatProject .projectPlanet img,
+.originalFormatProject .projectResource video,
+.originalFormatProject .projectResource img{
+  object-fit:contain;
 }
 .projectPlanet .mediaZoom{
   width:100%;
@@ -2296,8 +2331,9 @@ h2{font-size:clamp(30px,4vw,48px);line-height:1;margin:0;letter-spacing:0}
 </head>
 <body>
 <div id="root"></div>
-<form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+<form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display:none">
   <input type="hidden" name="form-name" value="contact" />
+  <input name="bot-field" />
   <input name="title" />
   <input name="email" />
   <textarea name="message"></textarea>
@@ -2308,7 +2344,7 @@ h2{font-size:clamp(30px,4vw,48px);line-height:1;margin:0;letter-spacing:0}
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
 const projects=[
-{title:'Aastra - 3D Virtual Influencer & Merch Campaign',category:'3D Character / Virtual Influencer / Fashion & Merch',desc:'A 3D virtual influencer project focused on digital character production, fashion visuals, motion capture workflow and short-form social content across multiple campaign themes.',role:'3D Character Artist / Digital Fashion Artist / Motion Designer / Video Editor',tools:'Character Creator 4, iClone 8, Blender, CLO 3D, Substance Painter, Rokoko Studio Pro 2, After Effects, Premiere Pro, Photoshop',skills:'3D character creation, digital fashion, clothing simulation, posing, motion capture, rendering, compositing, social media video editing',images:['assets/images/aastra-01-1-png.webp','assets/images/aastra-02-1-png.webp','assets/images/aastra-03-1-png.webp','assets/images/aastra-01-2-png.webp','assets/images/aastra-02-2-png.webp','assets/images/aastra-03-2-png.webp'],videos:[['assets/Content/Aastra/3D video/Final.mp4','assets/posters/aastra-main.jpg'],['assets/Content/Aastra/3D Ai animation/Fashion Transition.mp4','assets/posters/aastra-fashion-transition.jpg'],['assets/Content/Aastra/3D video/outfit showcase.mp4','assets/posters/aastra-summer-mode.jpg'],['assets/Content/Aastra/3D video/aastra_dancing.mp4','assets/posters/aastra-easter.jpg']],featured:true,note:'Featured'},
+{title:'Aastra - 3D Virtual Influencer & Merch Campaign',category:'3D Character / Virtual Influencer / Fashion & Merch',desc:'A 3D virtual influencer project focused on digital character production, fashion visuals, motion capture workflow and short-form social content across multiple campaign themes.',role:'3D Character Artist / Digital Fashion Artist / Motion Designer / Video Editor',tools:'Character Creator 4, iClone 8, Blender, CLO 3D, Substance Painter, Rokoko, After Effects, Premiere Pro, Photoshop',skills:'3D character creation, digital fashion, clothing simulation, posing, motion capture, rendering, compositing, social media video editing',images:['assets/images/aastra-01-1-png.webp','assets/images/aastra-02-1-png.webp','assets/images/aastra-03-1-png.webp','assets/images/aastra-01-2-png.webp','assets/images/aastra-02-2-png.webp','assets/images/aastra-03-2-png.webp'],videos:[['assets/Content/Aastra/3D video/Final.mp4','assets/posters/aastra-main.jpg'],['assets/Content/Aastra/3D Ai animation/Fashion Transition.mp4','assets/posters/aastra-fashion-transition.jpg'],['assets/Content/Aastra/3D video/outfit showcase.mp4','assets/posters/aastra-summer-mode.jpg'],['assets/Content/Aastra/3D video/aastra_dancing.mp4','assets/posters/aastra-easter.jpg']],featured:true,note:'Featured'},
 {title:'Magiclear Sunscreen Trailer',category:'3D Product Animation / Beauty Product Trailer',desc:'A cinematic sunscreen product trailer created for Magiclear, using clean skincare visuals, water-inspired freshness, soft lighting and smooth product motion.',role:'3D Artist / Motion Designer / Video Editor',tools:'Blender, Substance Painter, Premiere Pro, After Effects',skills:'3D product animation, texturing, cinematic lighting, camera movement, beauty advertising visuals, editing, compositing',images:[],videos:[['assets/videos/sunscreen cream.mp4','assets/posters/magiclear-sunscreen.jpg']],featured:true,note:'Featured'},
 {title:'Alinea Interior Visualization',category:'3D Interior Visualization / Furniture & Home Decor',desc:'Interior renderings created for Alinea, including bedroom and living room scenes designed to present furniture and home decor in warm lifestyle environments.',role:'3D Visualizer / Interior Rendering Artist',tools:'Blender, Photoshop',skills:'Interior visualization, furniture rendering, scene styling, realistic lighting, material work, commercial lifestyle rendering',images:['assets/images/alinea-front-2-jpg.webp','assets/images/alinea-front-jpg-jpg.webp','assets/images/alinea-01-1-jpg.webp','assets/images/alinea-v3-02-jpg.webp'],videos:[],featured:true,note:'Featured'},
 {title:'Option France - Tableware & Lifestyle Product Renders',category:'3D Product Visualization / Lifestyle Product Rendering',desc:'Product renderings created for Option in France, focused on elegant tableware, glassware, floral arrangements and event styling, with lifestyle scenes and close-up details.',role:'3D Visualizer / Product Rendering Artist',tools:'Blender, Substance Painter, Photoshop',skills:'3D product rendering, lifestyle visualization, materials, lighting, commercial composition, table styling, close-up detailing',images:['assets/images/option-france-01-v3-1-jpg.webp','assets/images/option-france-02-4k-jpg.webp','assets/images/option-france-03-v2-jpg.webp','assets/images/option-france-closeup-jpg-jpg.webp','assets/images/option-france-front-jpg-1-jpg.webp','assets/images/option-france-top-v2-jpg.webp'],videos:[],featured:true,note:'Featured'},
@@ -2450,6 +2486,7 @@ function Hero(){
   const [hasScrolled,setHasScrolled]=React.useState(false);
   const [heroDormant,setHeroDormant]=React.useState(false);
   const [frameRatio,setFrameRatio]=React.useState('16 / 9');
+  const [frameMuted,setFrameMuted]=React.useState(true);
   const heroRef=React.useRef(null);
   const bgVideoRef=React.useRef(null);
   const frameVideoRef=React.useRef(null);
@@ -2512,6 +2549,19 @@ function Hero(){
       if(frameVideo && hasScrolled) frameVideo.play().catch(()=>{});
     }
   },[heroDormant,hasScrolled]);
+  React.useEffect(()=>{
+    if(frameVideoRef.current) frameVideoRef.current.muted=frameMuted;
+  },[frameMuted]);
+  const toggleFrameSound=()=>{
+    const frameVideo=frameVideoRef.current;
+    const nextMuted=!frameMuted;
+    setFrameMuted(nextMuted);
+    if(frameVideo){
+      frameVideo.muted=nextMuted;
+      frameVideo.volume=1;
+      frameVideo.play().catch(()=>{});
+    }
+  };
   const heroStyle={
     '--hero-progress':scrollProgress,
     '--hero-overlay':hasScrolled ? .34 : 0,
@@ -2532,14 +2582,18 @@ function Hero(){
         <h1><span className="highlight">Cinematic</span> <span className="highlight">3D</span> & <span className="highlight">AI visuals</span> for <span className="highlight">brands</span> that need to stand out.</h1>
         <p className="lead">I create product films, virtual influencer content, CGI scenes, AI ads, and motion design built for campaigns, launches, and social media.</p>
       </div>
-      <div className={`heroFrame ${hasScrolled?'isVisible':''}`} aria-hidden="true">
-        <video ref={frameVideoRef} key={`${active.src}-frame`} autoPlay muted loop playsInline preload="auto" onLoadedMetadata={e=>{
+      <div className={`heroFrame ${hasScrolled?'isVisible':''}`}>
+        <video ref={frameVideoRef} key={`${active.src}-frame`} autoPlay muted={frameMuted} loop playsInline preload="auto" aria-label="Showreel preview" onLoadedMetadata={e=>{
           const video=e.currentTarget;
           if(video.videoWidth && video.videoHeight) setFrameRatio(`${video.videoWidth} / ${video.videoHeight}`);
+          video.muted=frameMuted;
           syncHeroVideos(true);
         }} onLoadedData={()=>syncHeroVideos(true)} onPlay={()=>syncHeroVideos(true)} onSeeked={()=>syncHeroVideos()}>
           <source src={active.src} type="video/mp4" />
         </video>
+        <button className="heroSoundBtn" type="button" onClick={toggleFrameSound} aria-label={frameMuted ? 'Turn showreel sound on' : 'Turn showreel sound off'} title={frameMuted ? 'Sound off' : 'Sound on'}>
+          <Icon type={frameMuted ? 'sound-off' : 'sound-on'} />
+        </button>
       </div>
     </div>
   </header>;
@@ -2643,7 +2697,8 @@ function ProjectSystem({item,index,isLast,onOpenLightbox}){
     const imageIndex=imageItems.findIndex(media=>media.src===src);
     if(imageIndex>=0) onOpenLightbox({title:item.title,images:imageItems,index:imageIndex});
   };
-  return <article id={`project-${slugify(item.title)}`} className="projectBranch">
+  const originalFormat=/aastra|astronaut/.test(item.title.toLowerCase());
+  return <article id={`project-${slugify(item.title)}`} className={`projectBranch ${originalFormat?'originalFormatProject':''}`}>
     {!isLast && <ProjectSegment index={index} />}
     <div className="projectBranchLabel">
       <span>{item.category}</span>
@@ -2778,7 +2833,7 @@ function About(){
     {name:'iClone 8',mark:'IC',color:'#000000',localIcon:'assets/logos/Iclone 8.png',icon:'https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/reallusion.svg'},
     {name:'CLO 3D',mark:'CLO',color:'#000000',localIcon:'assets/logos/clo3d-logo.png',icon:'https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/clo3d.svg'},
     {name:'Substance Painter',mark:'SP',color:'#103000',localIcon:'assets/logos/adobe-substance-3d-painter-icon.png',icon:'https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/adobesubstance3d.svg'},
-    {name:'Rokoko Studio Pro 2',mark:'RK',color:'#000000',localIcon:'assets/logos/Rokoko.png',icon:'https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/rokoko.svg'},
+    {name:'Rokoko',mark:'RK',color:'#000000',localIcon:'assets/logos/Rokoko.png',icon:'https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/rokoko.svg'},
     {name:'After Effects',mark:'Ae',color:'#000050',localIcon:'assets/logos/adobe-after-effects-icon.png',icon:'https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/adobeaftereffects.svg'},
     {name:'Premiere Pro',mark:'Pr',color:'#000050',localIcon:'assets/logos/adobe-premiere-pro-icon.png',icon:'https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/adobepremierepro.svg'},
     {name:'Photoshop',mark:'Ps',color:'#001030',localIcon:'assets/logos/adobe-photoshop-icon.png',icon:'https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/adobephotoshop.svg'}
@@ -2872,7 +2927,7 @@ function Contact(){
       message:form.message.trim()
     });
     try{
-      const response=await fetch('/',{
+      const response=await fetch(window.location.pathname || '/',{
         method:'POST',
         headers:{'Content-Type':'application/x-www-form-urlencoded'},
         body:payload.toString()
