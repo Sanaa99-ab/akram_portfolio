@@ -322,33 +322,6 @@ h1{font-size:clamp(42px,6.8vw,88px);line-height:.94;margin:14px 0 20px;max-width
   object-position:center;
   background:#050505;
 }
-.heroSoundBtn{
-  position:absolute;
-  right:12px;
-  bottom:12px;
-  z-index:3;
-  width:42px;
-  height:42px;
-  display:grid;
-  place-items:center;
-  border:1px solid rgba(255,255,255,.32);
-  border-radius:50%;
-  padding:0;
-  color:#171109;
-  background:var(--gold);
-  box-shadow:0 14px 34px rgba(0,0,0,.28);
-  transition:transform .18s ease,background .18s ease;
-}
-.heroSoundBtn:hover{
-  transform:translateY(-2px);
-  background:#e0ad48;
-}
-.heroSoundBtn svg{
-  width:19px;
-  height:19px;
-  display:block;
-  stroke:currentColor;
-}
 .heroGlass.isVisible{
   opacity:var(--copy-opacity);
   transform:translateY(var(--copy-y));
@@ -2486,7 +2459,6 @@ function Hero(){
   const [hasScrolled,setHasScrolled]=React.useState(false);
   const [heroDormant,setHeroDormant]=React.useState(false);
   const [frameRatio,setFrameRatio]=React.useState('16 / 9');
-  const [frameMuted,setFrameMuted]=React.useState(true);
   const heroRef=React.useRef(null);
   const bgVideoRef=React.useRef(null);
   const frameVideoRef=React.useRef(null);
@@ -2528,15 +2500,11 @@ function Hero(){
     };
   },[]);
   React.useEffect(()=>{
-    let syncFrame=0;
-    const tick=()=>{
-      syncHeroVideos();
-      syncFrame=window.requestAnimationFrame(tick);
-    };
+    if(heroDormant) return;
     syncHeroVideos(true);
-    syncFrame=window.requestAnimationFrame(tick);
-    return ()=>window.cancelAnimationFrame(syncFrame);
-  },[syncHeroVideos]);
+    const syncTimer=window.setInterval(()=>syncHeroVideos(),500);
+    return ()=>window.clearInterval(syncTimer);
+  },[syncHeroVideos,heroDormant]);
   React.useEffect(()=>{
     const bgVideo=bgVideoRef.current;
     const frameVideo=frameVideoRef.current;
@@ -2549,19 +2517,6 @@ function Hero(){
       if(frameVideo && hasScrolled) frameVideo.play().catch(()=>{});
     }
   },[heroDormant,hasScrolled]);
-  React.useEffect(()=>{
-    if(frameVideoRef.current) frameVideoRef.current.muted=frameMuted;
-  },[frameMuted]);
-  const toggleFrameSound=()=>{
-    const frameVideo=frameVideoRef.current;
-    const nextMuted=!frameMuted;
-    setFrameMuted(nextMuted);
-    if(frameVideo){
-      frameVideo.muted=nextMuted;
-      frameVideo.volume=1;
-      frameVideo.play().catch(()=>{});
-    }
-  };
   const heroStyle={
     '--hero-progress':scrollProgress,
     '--hero-overlay':hasScrolled ? .34 : 0,
@@ -2583,17 +2538,13 @@ function Hero(){
         <p className="lead">I create product films, virtual influencer content, CGI scenes, AI ads, and motion design built for campaigns, launches, and social media.</p>
       </div>
       <div className={`heroFrame ${hasScrolled?'isVisible':''}`}>
-        <video ref={frameVideoRef} key={`${active.src}-frame`} autoPlay muted={frameMuted} loop playsInline preload="auto" aria-label="Showreel preview" onLoadedMetadata={e=>{
+        <video ref={frameVideoRef} key={`${active.src}-frame`} autoPlay muted loop playsInline preload="metadata" aria-label="Showreel preview" onLoadedMetadata={e=>{
           const video=e.currentTarget;
           if(video.videoWidth && video.videoHeight) setFrameRatio(`${video.videoWidth} / ${video.videoHeight}`);
-          video.muted=frameMuted;
           syncHeroVideos(true);
         }} onLoadedData={()=>syncHeroVideos(true)} onPlay={()=>syncHeroVideos(true)} onSeeked={()=>syncHeroVideos()}>
           <source src={active.src} type="video/mp4" />
         </video>
-        <button className="heroSoundBtn" type="button" onClick={toggleFrameSound} aria-label={frameMuted ? 'Turn showreel sound on' : 'Turn showreel sound off'} title={frameMuted ? 'Sound off' : 'Sound on'}>
-          <Icon type={frameMuted ? 'sound-off' : 'sound-on'} />
-        </button>
       </div>
     </div>
   </header>;
