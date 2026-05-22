@@ -5,3 +5,7 @@ assets/Content/Aastra/3D video/outfit showcase.mp4
 assets/videos/astroun.mp4
 .wrangler/
 .dev.vars*
+
+!.dev.vars.example
+.env*
+!.env.example
