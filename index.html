@@ -1004,6 +1004,11 @@ h2{font-size:clamp(30px,4vw,48px);line-height:1;margin:0;letter-spacing:0}
   font-size:16px;
   line-height:1.55;
 }
+.projectBranchLabel .btn{
+  position:relative;
+  z-index:1;
+  margin-top:22px;
+}
 .lightbox{
   position:fixed;
   inset:0;
@@ -1930,16 +1935,19 @@ h2{font-size:clamp(30px,4vw,48px);line-height:1;margin:0;letter-spacing:0}
 .modalBackdrop{
   position:fixed;
   inset:0;
-  z-index:60;
+  z-index:1000;
   display:grid;
   place-items:center;
   padding:22px;
   background:rgba(0,0,0,.72);
+  backdrop-filter:blur(6px);
+  overscroll-behavior:contain;
 }
 .modal{
   width:min(1040px,96vw);
   max-height:90vh;
   overflow:auto;
+  overscroll-behavior:contain;
   border:1px solid var(--line);
   border-radius:22px;
   background:#fffaf0;
@@ -1948,11 +1956,230 @@ h2{font-size:clamp(30px,4vw,48px);line-height:1;margin:0;letter-spacing:0}
 .modalHead{display:flex;justify-content:space-between;gap:18px;align-items:start;padding:22px;border-bottom:1px solid var(--line)}
 .closeBtn{border:1px solid var(--line);border-radius:999px;background:rgba(20,24,32,.06);color:var(--text);width:40px;height:40px}
 .modalBody{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;padding:22px}
-.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.gallery img,.gallery video{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;border:1px solid var(--line);background:#111}
+.gallery{
+  display:grid;
+  gap:10px;
+}
+.modalMediaStage{
+  position:relative;
+  overflow:hidden;
+  border-radius:12px;
+  background:#111;
+  color:#fff;
+}
+.modalMediaZoomLayer{
+  width:100%;
+  border:0;
+  padding:0;
+  background:#111;
+  color:inherit;
+}
+.modalMediaStage img,
+.modalMediaStage video{
+  width:100%;
+  aspect-ratio:16 / 10;
+  object-fit:contain;
+  background:#111;
+}
+.modalMediaStage:after{
+  content:"Zoom";
+  position:absolute;
+  right:9px;
+  bottom:9px;
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:999px;
+  padding:5px 8px;
+  color:#fff;
+  background:rgba(8,9,13,.62);
+  backdrop-filter:blur(8px);
+  font-size:11px;
+  font-weight:850;
+  opacity:0;
+  transform:translateY(4px);
+  transition:opacity .18s ease,transform .18s ease;
+}
+.modalMediaStage:hover:after{opacity:1;transform:translateY(0)}
+.modalMediaNav{
+  position:absolute;
+  top:50%;
+  z-index:2;
+  width:40px;
+  height:40px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:50%;
+  color:#171109;
+  background:var(--gold);
+  box-shadow:0 12px 28px rgba(0,0,0,.24);
+  transform:translateY(-50%);
+}
+.modalMediaNav.prev{left:10px}
+.modalMediaNav.next{right:10px}
+.modalMediaCount{
+  position:absolute;
+  left:10px;
+  bottom:10px;
+  z-index:2;
+  border:1px solid rgba(255,255,255,.26);
+  border-radius:999px;
+  padding:5px 8px;
+  color:#fff;
+  background:rgba(8,9,13,.62);
+  backdrop-filter:blur(8px);
+  font-size:11px;
+  font-weight:850;
+}
+.modalThumbs{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding-bottom:2px;
+}
+.modalThumb{
+  flex:0 0 70px;
+  width:70px;
+  aspect-ratio:1;
+  overflow:hidden;
+  border:2px solid transparent;
+  border-radius:8px;
+  padding:0;
+  background:#111;
+}
+.modalThumb.active{border-color:var(--gold)}
+.modalThumb img,
+.modalThumb video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.modalThumbType{
+  position:absolute;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+  clip:rect(0 0 0 0);
+}
 .details{color:var(--muted)}
 .detailRow{display:grid;grid-template-columns:90px 1fr;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
 .detailRow b{color:var(--text)}
+.detailRow.roleDetail{
+  align-items:start;
+  margin:4px 0 6px;
+  border:1px solid rgba(201,149,45,.3);
+  border-radius:12px;
+  padding:14px;
+  background:rgba(201,149,45,.1);
+}
+.detailRow.roleDetail b{
+  color:#8a651a;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.roleValue{
+  color:#171109;
+  font-size:15px;
+  font-weight:850;
+  line-height:1.45;
+}
+.detailTools{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+}
+.detailTool{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  border:1px solid rgba(20,24,32,.12);
+  border-radius:6px;
+  padding:6px 9px 6px 6px;
+  color:#373027;
+  background:rgba(255,255,255,.58);
+  font-size:12px;
+  font-weight:750;
+  line-height:1.15;
+}
+.detailToolIcon{
+  width:22px;
+  height:22px;
+  flex:0 0 22px;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  border-radius:5px;
+  background:rgba(20,24,32,.08);
+  color:#171109;
+  font-size:9px;
+  font-weight:900;
+}
+.detailToolIcon img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+.mediaLightbox{
+  position:fixed;
+  inset:0;
+  z-index:1010;
+  display:grid;
+  place-items:center;
+  padding:24px;
+  background:rgba(8,9,13,.84);
+  overscroll-behavior:contain;
+}
+.mediaLightboxFrame{
+  position:relative;
+  display:grid;
+  place-items:center;
+  width:min(1180px,94vw);
+  max-height:88vh;
+}
+.mediaLightbox img,
+.mediaLightbox video{
+  max-width:100%;
+  max-height:88vh;
+  object-fit:contain;
+  border-radius:14px;
+  background:#111;
+  box-shadow:0 24px 80px rgba(0,0,0,.44);
+}
+.mediaLightboxClose{
+  position:fixed;
+  top:18px;
+  right:18px;
+  z-index:2;
+  min-width:88px;
+  height:38px;
+  border:1px solid rgba(255,255,255,.32);
+  border-radius:999px;
+  color:#fff;
+  background:rgba(8,9,13,.62);
+  backdrop-filter:blur(10px);
+  font-size:12px;
+  font-weight:850;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.mediaLightboxNav{
+  position:fixed;
+  top:50%;
+  z-index:2;
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:50%;
+  color:#171109;
+  background:var(--gold);
+  box-shadow:0 16px 40px rgba(0,0,0,.28);
+  transform:translateY(-50%);
+}
+.mediaLightboxPrev{left:18px}
+.mediaLightboxNext{right:18px}
 @media (max-width:1560px){
   .projectRail{
     position:relative;
@@ -2035,6 +2262,16 @@ h2{font-size:clamp(30px,4vw,48px);line-height:1;margin:0;letter-spacing:0}
     background:var(--gold);
   }
   .heroLayout,.showreelPanel,.workLayout,.about,.modalBody{grid-template-columns:1fr}
+  .modal{
+    width:min(720px,94vw);
+    max-height:92vh;
+  }
+  .modalBody{
+    gap:16px;
+  }
+  .gallery{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
   .heroLayout{
     gap:24px;
     padding-top:72vh;
@@ -2297,29 +2534,145 @@ h2{font-size:clamp(30px,4vw,48px);line-height:1;margin:0;letter-spacing:0}
     width:100%;
     justify-self:stretch;
   }
+  .modalBackdrop{
+    align-items:stretch;
+    justify-items:stretch;
+    padding:0;
+  }
+  .modal{
+    width:100vw;
+    max-height:none;
+    height:100dvh;
+    border:0;
+    border-radius:0;
+  }
+  .modalHead{
+    position:sticky;
+    top:0;
+    z-index:2;
+    align-items:center;
+    padding:14px 16px;
+    background:#fffaf0;
+  }
+  .modalHead h2{
+    font-size:22px;
+    line-height:1.1;
+  }
+  .closeBtn{
+    width:44px;
+    height:44px;
+    flex:0 0 44px;
+  }
+  .modalBody{
+    gap:16px;
+    padding:16px;
+  }
   .gallery{grid-template-columns:1fr}
+  .modalMediaStage img,
+  .modalMediaStage video{
+    aspect-ratio:16 / 10;
+  }
+  .modalMediaStage:after{
+    opacity:1;
+    transform:none;
+  }
+  .modalMediaNav{
+    width:38px;
+    height:38px;
+  }
+  .modalThumb{
+    flex-basis:58px;
+    width:58px;
+  }
+  .details{
+    padding-bottom:28px;
+  }
+  .details > p{
+    font-size:15px;
+    line-height:1.6;
+  }
+  .detailRow{
+    grid-template-columns:1fr;
+    gap:7px;
+    padding:14px 0;
+  }
+  .detailRow.roleDetail{
+    padding:14px;
+  }
+  .detailRow b{
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+  }
+  .roleValue{
+    font-size:15px;
+  }
+  .detailTools{
+    gap:6px;
+  }
+  .detailTool{
+    padding:7px 8px;
+    font-size:12px;
+  }
+  .mediaLightbox{
+    padding:14px;
+  }
+  .mediaLightboxFrame{
+    width:100%;
+    max-height:82dvh;
+  }
+  .mediaLightbox img,
+  .mediaLightbox video{
+    max-height:82dvh;
+    border-radius:10px;
+  }
+  .mediaLightboxClose{
+    top:12px;
+    right:12px;
+    min-width:78px;
+    height:38px;
+  }
+  .mediaLightboxNav{
+    width:40px;
+    height:40px;
+  }
+  .mediaLightboxPrev{left:10px}
+  .mediaLightboxNext{right:10px}
   .chatWidget{right:14px;bottom:14px}
 }
 </style>
 </head>
 <body>
 <div id="root"></div>
-<form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display:none">
-  <input type="hidden" name="form-name" value="contact" />
-  <input name="bot-field" />
-  <input name="title" />
-  <input name="email" />
-  <textarea name="message"></textarea>
-</form>
-
 <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
 const R2_ASSET_BASE='https://media.akramabril.com';
 const r2Asset=path=>`${R2_ASSET_BASE}/${path.split('/').map(encodeURIComponent).join('/')}`;
+const toolLogos={
+  'After Effects':{src:'assets/logos/adobe-after-effects-icon.png',mark:'Ae'},
+  'Blender':{src:'assets/logos/blender-icon.png',mark:'BL'},
+  'Character Creator 4':{src:'assets/logos/character creator.png',mark:'CC'},
+  'CLO 3D':{src:'assets/logos/clo3d-logo.png',mark:'CLO'},
+  'iClone 8':{src:'assets/logos/Iclone 8.png',mark:'IC'},
+  'Photoshop':{src:'assets/logos/adobe-photoshop-icon.png',mark:'Ps'},
+  'Premiere Pro':{src:'assets/logos/adobe-premiere-pro-icon.png',mark:'Pr'},
+  'Rokoko':{src:'assets/logos/Rokoko.png',mark:'RK'},
+  'Rokoko Studio Pro 2':{src:'assets/logos/Rokoko.png',mark:'RK'},
+  'Substance Painter':{src:'assets/logos/adobe-substance-3d-painter-icon.png',mark:'SP'}
+};
+function ToolBadge({name}){
+  const tool=toolLogos[name];
+  return <span className="detailTool">
+    <span className="detailToolIcon">
+      {tool?.src ? <img src={tool.src} alt="" loading="lazy" /> : (tool?.mark || name.slice(0,2))}
+    </span>
+    <span>{name}</span>
+  </span>;
+}
 const projects=[
-{title:'Aastra - 3D Virtual Influencer & Merch Campaign',category:'3D Character / Virtual Influencer / Fashion & Merch',desc:'A 3D virtual influencer project focused on digital character production, fashion visuals, motion capture workflow and short-form social content across multiple campaign themes.',role:'3D Character Artist / Digital Fashion Artist / Motion Designer / Video Editor',tools:'Character Creator 4, iClone 8, Blender, CLO 3D, Substance Painter, Rokoko, After Effects, Premiere Pro, Photoshop',skills:'3D character creation, digital fashion, clothing simulation, posing, motion capture, rendering, compositing, social media video editing',images:['assets/images/aastra-01-1-png.webp','assets/images/aastra-02-1-png.webp','assets/images/aastra-03-1-png.webp','assets/images/aastra-01-2-png.webp','assets/images/aastra-02-2-png.webp','assets/images/aastra-03-2-png.webp'],videos:[[r2Asset('Final.mp4'),'assets/posters/aastra-main.jpg'],['assets/Content/Aastra/3D Ai animation/Fashion Transition.mp4','assets/posters/aastra-fashion-transition.jpg'],['assets/Content/Aastra/3D video/aastra_dancing.mp4','assets/posters/aastra-easter.jpg']],featured:true,note:'Featured'},
+{title:'Aastra - 3D Virtual Influencer & Merch Campaign',category:'3D Character / Virtual Influencer / Fashion & Merch',desc:'A 3D virtual influencer project focused on digital character production, fashion visuals, motion capture workflow and short-form social content across multiple campaign themes.',role:'3D Character Artist / Digital Fashion Artist / Motion Designer / Video Editor',tools:'Character Creator 4, iClone 8, Blender, CLO 3D, Substance Painter, Rokoko Studio Pro 2, After Effects, Premiere Pro, Photoshop',skills:'3D character creation, digital fashion, clothing simulation, posing, motion capture, rendering, compositing, social media video editing',images:['assets/images/aastra-01-1-png.webp','assets/images/aastra-02-1-png.webp','assets/images/aastra-03-1-png.webp','assets/images/aastra-01-2-png.webp','assets/images/aastra-02-2-png.webp','assets/images/aastra-03-2-png.webp'],videos:[[r2Asset('Final.mp4'),'assets/posters/aastra-main.jpg'],['assets/Content/Aastra/3D Ai animation/Fashion Transition.mp4','assets/posters/aastra-fashion-transition.jpg'],['assets/Content/Aastra/3D video/aastra_dancing.mp4','assets/posters/aastra-easter.jpg']],featured:true,note:'Featured'},
 {title:'Magiclear Sunscreen Trailer',category:'3D Product Animation / Beauty Product Trailer',desc:'A cinematic sunscreen product trailer created for Magiclear, using clean skincare visuals, water-inspired freshness, soft lighting and smooth product motion.',role:'3D Artist / Motion Designer / Video Editor',tools:'Blender, Substance Painter, Premiere Pro, After Effects',skills:'3D product animation, texturing, cinematic lighting, camera movement, beauty advertising visuals, editing, compositing',images:[],videos:[['assets/videos/sunscreen cream.mp4','assets/posters/magiclear-sunscreen.jpg']],featured:true,note:'Featured'},
 {title:'Alinea Interior Visualization',category:'3D Interior Visualization / Furniture & Home Decor',desc:'Interior renderings created for Alinea, including bedroom and living room scenes designed to present furniture and home decor in warm lifestyle environments.',role:'3D Visualizer / Interior Rendering Artist',tools:'Blender, Photoshop',skills:'Interior visualization, furniture rendering, scene styling, realistic lighting, material work, commercial lifestyle rendering',images:['assets/images/alinea-front-2-jpg.webp','assets/images/alinea-front-jpg-jpg.webp','assets/images/alinea-01-1-jpg.webp','assets/images/alinea-v3-02-jpg.webp'],videos:[],featured:true,note:'Featured'},
 {title:'Option France - Tableware & Lifestyle Product Renders',category:'3D Product Visualization / Lifestyle Product Rendering',desc:'Product renderings created for Option in France, focused on elegant tableware, glassware, floral arrangements and event styling, with lifestyle scenes and close-up details.',role:'3D Visualizer / Product Rendering Artist',tools:'Blender, Substance Painter, Photoshop',skills:'3D product rendering, lifestyle visualization, materials, lighting, commercial composition, table styling, close-up detailing',images:['assets/images/option-france-01-v3-1-jpg.webp','assets/images/option-france-02-4k-jpg.webp','assets/images/option-france-03-v2-jpg.webp','assets/images/option-france-closeup-jpg-jpg.webp','assets/images/option-france-front-jpg-1-jpg.webp','assets/images/option-france-top-v2-jpg.webp'],videos:[],featured:true,note:'Featured'},
@@ -2340,6 +2693,11 @@ const showcaseItems=projects
     title:project.title,
     category:project.category,
     desc:project.desc,
+    role:project.role,
+    tools:project.tools,
+    skills:project.skills,
+    videos:project.videos,
+    images:project.images,
     media:[
       ...(project.videos||[]).map(([src,poster])=>({type:'video',src,poster})),
       ...(project.images||[]).map(src=>({type:'img',src}))
@@ -2566,7 +2924,7 @@ function Icon({type}){
   if(type==='sound-off') return <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5z"></path><path d="m22 9-6 6"></path><path d="m16 9 6 6"></path></svg>;
   return <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M8 3H3v5"></path><path d="M16 3h5v5"></path><path d="M21 16v5h-5"></path><path d="M3 16v5h5"></path></svg>;
 }
-function ProjectSystem({item,index,isLast,onOpenLightbox}){
+function ProjectSystem({item,index,isLast,onOpenLightbox,onOpenDetails}){
   const [mediaIndex,setMediaIndex]=React.useState(0);
   const [videoPlaying,setVideoPlaying]=React.useState(false);
   const [muted,setMuted]=React.useState(true);
@@ -2657,6 +3015,7 @@ function ProjectSystem({item,index,isLast,onOpenLightbox}){
       <span>{item.category}</span>
       <strong>{label}</strong>
       <p>{item.desc}</p>
+      <button className="btn" onClick={()=>onOpenDetails(item)}>View Details</button>
     </div>
     <div className="projectSystem" ref={systemRef}>
       <div className="projectSystemOrbit" aria-hidden="true"></div>
@@ -2692,13 +3051,15 @@ function ProjectSystem({item,index,isLast,onOpenLightbox}){
   </article>;
 }
 function Showreel({lightbox,onOpenLightbox,onCloseLightbox,onStepLightbox}){
+  const [selected,setSelected]=React.useState(null);
   return <section id="showreel" className="wrap projectNavigator">
     <div className="showreelSticky">
       <div className="sectionTop"><div><h2>Navigate Through <span className="titleAccent">My Projects</span></h2></div></div>
       <div className="projectTree">
-        {showcaseItems.map((item,index)=><ProjectSystem key={item.title} item={item} index={index} isLast={index===showcaseItems.length-1} onOpenLightbox={onOpenLightbox} />)}
+        {showcaseItems.map((item,index)=><ProjectSystem key={item.title} item={item} index={index} isLast={index===showcaseItems.length-1} onOpenLightbox={onOpenLightbox} onOpenDetails={setSelected} />)}
       </div>
     </div>
+    {selected && <ProjectModal project={selected} onClose={()=>setSelected(null)} />}
   </section>;
 }
 function ImageLightbox({lightbox,onClose,onStep}){
@@ -2742,36 +3103,102 @@ function Work(){
   </section>;
 }
 function ProjectModal({project,onClose}){
+  const [zoomedIndex,setZoomedIndex]=React.useState(null);
   React.useEffect(()=>{
-    const onKey=e=>{if(e.key==='Escape') onClose();};
+    const onKey=e=>{if(e.key==='Escape' && zoomedIndex===null) onClose();};
     window.addEventListener('keydown',onKey);
     return ()=>window.removeEventListener('keydown',onKey);
-  },[onClose]);
+  },[onClose,zoomedIndex]);
+  React.useEffect(()=>{
+    const scrollY=window.scrollY;
+    const previousHtmlOverflow=document.documentElement.style.overflow;
+    const previousHtmlOverscroll=document.documentElement.style.overscrollBehavior;
+    const previousOverflow=document.body.style.overflow;
+    const previousOverscroll=document.body.style.overscrollBehavior;
+    const previousScrollBehavior=document.documentElement.style.scrollBehavior;
+    document.documentElement.style.scrollBehavior='auto';
+    document.documentElement.style.overflow='hidden';
+    document.documentElement.style.overscrollBehavior='none';
+    document.body.style.overflow='hidden';
+    document.body.style.overscrollBehavior='none';
+    return ()=>{
+      document.documentElement.style.overflow=previousHtmlOverflow;
+      document.documentElement.style.overscrollBehavior=previousHtmlOverscroll;
+      document.body.style.overflow=previousOverflow;
+      document.body.style.overscrollBehavior=previousOverscroll;
+      window.requestAnimationFrame(()=>{
+        window.scrollTo({top:scrollY,left:0,behavior:'auto'});
+        document.documentElement.style.scrollBehavior=previousScrollBehavior;
+      });
+    };
+  },[]);
+  React.useEffect(()=>{
+    const onKey=e=>{if(e.key==='Escape' && zoomedIndex!==null) setZoomedIndex(null);};
+    window.addEventListener('keydown',onKey);
+    return ()=>window.removeEventListener('keydown',onKey);
+  },[zoomedIndex]);
   const media=[
     ...(project.videos||[]).map(([src,poster])=>({type:'video',src,poster})),
     ...(project.images||[]).map(src=>({type:'img',src}))
   ];
-  return <div className="modalBackdrop" onClick={onClose}>
+  const [mediaIndex,setMediaIndex]=React.useState(0);
+  const activeMedia=media[mediaIndex] || media[0];
+  const stepMedia=direction=>setMediaIndex(current=>(current + direction + media.length) % media.length);
+  const zoomedMedia=zoomedIndex!==null ? media[zoomedIndex] : null;
+  const stepZoomed=direction=>setZoomedIndex(current=>(current + direction + media.length) % media.length);
+  const tools=project.tools.split(', ');
+  const modalContent=<div className="modalBackdrop" onClick={onClose}>
     <div className="modal" onClick={e=>e.stopPropagation()} role="dialog" aria-modal="true" aria-label={project.title}>
       <div className="modalHead">
         <div><div className="eyebrow">{project.category}</div><h2>{project.title}</h2></div>
         <button className="closeBtn" onClick={onClose} aria-label="Close">x</button>
       </div>
       <div className="modalBody">
-        <div className="gallery">{media.map((item,index)=>item.type==='video'
-          ? <video key={`${item.src}-${index}`} controls playsInline poster={item.poster}><source src={item.src} type="video/mp4" /></video>
-          : <img key={`${item.src}-${index}`} src={item.src} alt={`${project.title} visual ${index+1}`} loading="lazy" />
-        )}</div>
+        <div className="gallery">
+          {activeMedia && <div className="modalMediaStage">
+            <button className="modalMediaZoomLayer" onClick={()=>setZoomedIndex(mediaIndex)} aria-label={`Zoom ${project.title} media ${mediaIndex+1}`}>
+              {activeMedia.type==='video'
+                ? <video key={activeMedia.src} muted playsInline poster={activeMedia.poster}><source src={activeMedia.src} type="video/mp4" /></video>
+                : <img key={activeMedia.src} src={activeMedia.src} alt={`${project.title} visual ${mediaIndex+1}`} loading="lazy" />
+              }
+            </button>
+            {media.length>1 && <React.Fragment>
+              <span className="modalMediaCount">{mediaIndex+1} / {media.length}</span>
+              <button className="modalMediaNav prev" onClick={()=>stepMedia(-1)} aria-label="Previous media">{'<'}</button>
+              <button className="modalMediaNav next" onClick={()=>stepMedia(1)} aria-label="Next media">{'>'}</button>
+            </React.Fragment>}
+          </div>}
+          {media.length>1 && <div className="modalThumbs">{media.map((item,index)=><button key={`${item.src}-${index}`} className={`modalThumb ${index===mediaIndex?'active':''}`} onClick={()=>setMediaIndex(index)} aria-label={`Show ${project.title} media ${index+1}`}>
+            {item.type==='video'
+              ? <video muted playsInline poster={item.poster}><source src={item.src} type="video/mp4" /></video>
+              : <img src={item.src} alt="" loading="lazy" />
+            }
+            <span className="modalThumbType">{item.type}</span>
+          </button>)}</div>}
+        </div>
         <div className="details">
           <p>{project.desc}</p>
-          <div className="detailRow"><b>Role</b><span>{project.role}</span></div>
-          <div className="detailRow"><b>Tools</b><span>{project.tools}</span></div>
+          <div className="detailRow roleDetail"><b>Role</b><span className="roleValue">{project.role}</span></div>
+          <div className="detailRow"><b>Tools</b><span className="detailTools">{tools.map(tool=><ToolBadge name={tool} key={tool} />)}</span></div>
           <div className="detailRow"><b>Skills</b><span>{project.skills}</span></div>
-          <div className="metaLine">{project.tools.split(', ').slice(0,6).map(tool=><span className="pill" key={tool}>{tool}</span>)}</div>
         </div>
       </div>
     </div>
+    {zoomedMedia && <div className="mediaLightbox" onClick={event=>{event.stopPropagation();setZoomedIndex(null);}} role="dialog" aria-modal="true" aria-label={`${project.title} enlarged media`}>
+      <button className="mediaLightboxClose" onClick={event=>{event.stopPropagation();setZoomedIndex(null);}} aria-label="Close enlarged media">Close</button>
+      {media.length>1 && <React.Fragment>
+        <button className="mediaLightboxNav mediaLightboxPrev" onClick={event=>{event.stopPropagation();stepZoomed(-1);}} aria-label="Previous enlarged media">{'<'}</button>
+        <button className="mediaLightboxNav mediaLightboxNext" onClick={event=>{event.stopPropagation();stepZoomed(1);}} aria-label="Next enlarged media">{'>'}</button>
+      </React.Fragment>}
+      <div className="mediaLightboxFrame" onClick={event=>event.stopPropagation()}>
+        {zoomedMedia.type==='video'
+          ? <video controls autoPlay playsInline poster={zoomedMedia.poster}><source src={zoomedMedia.src} type="video/mp4" /></video>
+          : <img src={zoomedMedia.src} alt={`${project.title} enlarged visual`} />
+        }
+      </div>
+    </div>}
   </div>;
+  return ReactDOM.createPortal(modalContent,document.body);
 }
 function Services(){
   return <section id="services" className="wrap">
@@ -2873,17 +3300,16 @@ function Contact(){
     }
     setSubmitting(true);
     setStatus('Sending your message...');
-    const payload=new URLSearchParams({
-      'form-name':'contact',
+    const payload={
       title:form.title.trim(),
       email:form.email.trim(),
       message:form.message.trim()
-    });
+    };
     try{
-      const response=await fetch(window.location.pathname || '/',{
+      const response=await fetch('/api/contact',{
         method:'POST',
-        headers:{'Content-Type':'application/x-www-form-urlencoded'},
-        body:payload.toString()
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(payload)
       });
       if(!response.ok) throw new Error('Form submission failed');
       setForm({title:'',email:'',message:''});
@@ -2903,9 +3329,7 @@ function Contact(){
           <a className="contactEmail" href={`mailto:${portfolioEmail}`}><FooterEmailIcon />{portfolioEmail}</a>
           <a className="contactPhone" href={portfolioPhoneHref}><PhoneIcon />{portfolioPhone}</a>
         </div>
-        <form className="contactForm" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={submit} noValidate>
-          <input type="hidden" name="form-name" value="contact" />
-          <p hidden><label>Do not fill this out: <input name="bot-field" /></label></p>
+        <form className="contactForm" onSubmit={submit} noValidate>
           <input className={errors.title?'isInvalid':''} name="title" value={form.title} onChange={update} placeholder="Project title" aria-label="Project title" aria-invalid={!!errors.title} aria-describedby={errors.title?'title-error':undefined} maxLength="120" required />
           {errors.title && <p className="fieldError" id="title-error">{errors.title}</p>}
           <input className={errors.email?'isInvalid':''} name="email" value={form.email} onChange={update} placeholder="Your email" type="email" aria-label="Your email" aria-invalid={!!errors.email} aria-describedby={errors.email?'email-error':undefined} maxLength="160" required />

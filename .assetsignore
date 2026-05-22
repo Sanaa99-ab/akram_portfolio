@@ -9,6 +9,10 @@
 wrangler.toml
 wrangler.json
 wrangler.jsonc
+worker
+worker/**
+functions
+functions/**
 assets/Showreel.mp4
 assets/2d motion/Submarine.mp4
 assets/Content/Aastra/3D video/Final.mp4
